@@ -10,15 +10,18 @@ namespace Community.Models
 
         public string TheMessage { get; set; }
 
+        public string Title { get; set; }
+
         // Navigation property
         public virtual ApplicationUser Sender { get; set; }
 
         // Navigation property
         public virtual ICollection<ReadEntry> ReadEntries { get; set; }
 
-        public Message(string message, ApplicationUser sender, ApplicationUser[] receivers)
+        public Message(string message, string title, ApplicationUser sender, ApplicationUser[] receivers)
         {
             this.TheMessage = message;
+            this.Title = title;
             this.Sender = sender;
             ReadEntries = new List<ReadEntry>();
 

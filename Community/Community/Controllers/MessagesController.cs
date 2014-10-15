@@ -10,7 +10,6 @@ using Community.Models;
 
 namespace Community.Controllers
 {
-      [Authorize]
     public class MessagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,15 +17,7 @@ namespace Community.Controllers
         // GET: Messages
         public ActionResult Index()
         {
-            var messages = db.Messages.ToList();
-            if (messages != null)
-            {
-                return View(db.Messages.ToList());
-            }
-            else
-            {
-                return View();
-            }
+            return View(db.Messages.ToList());
         }
 
         // GET: Messages/Details/5
@@ -55,7 +46,7 @@ namespace Community.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TheMessage")] Message message)
+        public ActionResult Create([Bind(Include = "Id,TheMessage,Title")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +78,7 @@ namespace Community.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TheMessage")] Message message)
+        public ActionResult Edit([Bind(Include = "Id,TheMessage,Title")] Message message)
         {
             if (ModelState.IsValid)
             {
