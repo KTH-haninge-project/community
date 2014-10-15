@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +19,9 @@ namespace Community.Controllers
         // GET: Message
         public ActionResult Index()
         {
-            var messages = db.Messages.ToList();
+            string currentuser = User.Identity.GetUserId();
+
+            var messages = db.Messages.Where(m => m.Sender.Equals(currentuser)).ToList();
             List<MessageViewModel> messagemodels = new List<MessageViewModel>();
 
             foreach (var message in messages)
