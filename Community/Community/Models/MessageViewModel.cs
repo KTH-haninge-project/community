@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.ComponentModel.DataAnnotations;
 
 namespace Community.Models
 {
@@ -13,6 +14,7 @@ namespace Community.Models
     {
         public int Id { get; set; } // Id for Entity Framework and database
 
+         [Display(Name = "Message")]
         public string TheMessage { get; set; }
 
         public string Title { get; set; }
