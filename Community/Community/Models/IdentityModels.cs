@@ -40,5 +40,7 @@ namespace Community.Models
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<ReadEntry> ReadEntries { get; set; }
+
+        public System.Data.Entity.DbSet<Community.Models.MessageViewModel> MesssagesViewModels { get; set; }
     }
 }
