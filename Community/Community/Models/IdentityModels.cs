@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Community.Models
 {
@@ -14,6 +16,13 @@ namespace Community.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        // Navigation property
+        public virtual ICollection<Message> SentMessages { get; set; }
+        public ApplicationUser()
+        {
+            SentMessages = new List<Message>();
         }
     }
 
@@ -28,5 +37,8 @@ namespace Community.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<ReadEntry> ReadEntries { get; set; }
     }
 }
