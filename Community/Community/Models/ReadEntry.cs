@@ -12,15 +12,14 @@ namespace Community.Models
         // Navigation property
         public virtual Message Message { get; set; }
 
-        // Navigation property
-        public virtual ApplicationUser Receiver { get; set; }
+        public string Receiver { get; set; }
 
         public bool hasRead()
         {
             return (FirstReadTime != null);
         }
 
-        public ReadEntry(Message message, ApplicationUser receiver)
+        public ReadEntry(Message message, string receiver)
         {
             FirstReadTime = null;
             this.Message = message;

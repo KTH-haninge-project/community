@@ -13,19 +13,19 @@ namespace Community.Models
         public string Title { get; set; }
 
         // Navigation property
-        public virtual ApplicationUser Sender { get; set; }
+        public string Sender { get; set; }
 
         // Navigation property
         public virtual ICollection<ReadEntry> ReadEntries { get; set; }
 
-        public Message(string message, string title, ApplicationUser sender, ApplicationUser[] receivers)
+        public Message(string message, string title, string sender, string[] receivers)
         {
             this.TheMessage = message;
             this.Title = title;
             this.Sender = sender;
             ReadEntries = new List<ReadEntry>();
 
-            foreach (ApplicationUser receiver in receivers)
+            foreach (string receiver in receivers)
             {
                 ReadEntries.Add(new ReadEntry(this, receiver));
             }

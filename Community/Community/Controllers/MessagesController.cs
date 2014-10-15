@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Community.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
@@ -50,6 +51,7 @@ namespace Community.Controllers
         {
             if (ModelState.IsValid)
             {
+                message.Sender = User.Identity.GetUserId();
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
