@@ -18,7 +18,15 @@ namespace Community.Controllers
         // GET: Messages
         public ActionResult Index()
         {
-            return View(db.Messages.ToList());
+            var messages = db.Messages.ToList();
+            if (messages != null)
+            {
+                return View(db.Messages.ToList());
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Messages/Details/5

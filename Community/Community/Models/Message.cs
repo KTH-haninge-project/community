@@ -27,5 +27,10 @@ namespace Community.Models
                 ReadEntries.Add(new ReadEntry(this, receiver));
             }
         }
+
+        public Message()
+        {
+            ReadEntries = new List<ReadEntry>();
+        }
     }
 }
