@@ -4,6 +4,11 @@ namespace Community.Models
 {
     public class ReadEntry
     {
+        public ReadEntry()
+        {
+
+        }
+
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
 

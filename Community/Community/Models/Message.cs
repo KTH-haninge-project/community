@@ -16,7 +16,7 @@ namespace Community.Models
         public string Sender { get; set; }
 
         // Navigation property
-        public virtual ICollection<ReadEntry> ReadEntries { get; set; }
+        public virtual List<ReadEntry> ReadEntries { get; set; }
 
         public Message(string message, string title, string sender, string[] receivers)
         {

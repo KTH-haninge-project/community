@@ -35,7 +35,13 @@ namespace Community.Models
         {
             this.Id = message.Id;
             this.Title = message.Title;
-            this.Receiver = "Hårdkodat värde i MessageViewModel.cs";
+            this.Receiver = "";
+            foreach (var entry in message.ReadEntries)
+            {
+                Receiver += entry.Receiver + ", ";
+            }
+           
+           
             this.TheMessage = message.TheMessage;
             var db = new ApplicationDbContext();
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
