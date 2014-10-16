@@ -12,7 +12,7 @@ namespace Community.Models
 
         public string Title { get; set; }
 
-        
+        public System.DateTime sendTimeStamp { get; set; }
 
         // Navigation property
         public string Sender { get; set; }
@@ -25,6 +25,7 @@ namespace Community.Models
             this.TheMessage = message;
             this.Title = title;
             this.Sender = sender;
+            this.sendTimeStamp = System.DateTime.Now;
             ReadEntries = new List<ReadEntry>();
 
             foreach (string receiver in receivers)

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace Community.Models
 {
@@ -17,6 +18,9 @@ namespace Community.Models
         public Boolean Deleted { get; set; }
 
         public String Read { get; set; }
+
+        public String Sent { get; set; }
+
 
         public string Title { get; set; }
 
@@ -35,17 +39,19 @@ namespace Community.Models
 
         public MessageViewModel(Message message)
         {
+            var db = new ApplicationDbContext();
             this.Id = message.Id;
             this.Title = message.Title;
             this.Receiver = "";
+            this.Sent = message.sendTimeStamp.ToString();
             foreach (var entry in message.ReadEntries)
             {
-                Receiver += entry.Receiver + ", ";
+                ApplicationUser user = db.Users.Find(entry.Receiver);
+                Receiver += user.Email + ", ";
             }
-           
-            
+            Receiver = Receiver.Remove(Receiver.Length-2);
+            Debug.WriteLine("Receiver: "+Receiver);
             this.TheMessage = message.TheMessage;
-            var db = new ApplicationDbContext();
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
             this.Sender = lol.Email;
         }

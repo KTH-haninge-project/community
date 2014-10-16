@@ -10,6 +10,12 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Sent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Read)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Read)
         </th>
         <th>
@@ -27,6 +33,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sent)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Read)
         </td>
