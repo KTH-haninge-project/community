@@ -21,20 +21,15 @@ namespace Community.Controllers
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
+            List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)).ToList<ReadEntry>();
 
-            var messagesID = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)).ToList();
-            List<MessageViewModel> messagemodels = new List<MessageViewModel>();
-            List<Message> myMessage=new List<Message>();
-            foreach (var message in messagesID)
+            List<MessageViewModel> messages = new List<MessageViewModel>();
+
+            foreach (ReadEntry entry in readEntries)
             {
-                myMessage=db.Messages.Where(r => r.Id.Equals(message.Id)).ToList();
-                //messagemodels.Add(new MessageViewModel(message));
+                messages.Add(new MessageViewModel(entry.Message));
             }
-            foreach (var myList in myMessage)
-            {
-                messagemodels.Add(new MessageViewModel(myList));
-            }
-            return View(messagemodels);
+            return View(messages);
         }
 
         // GET: Inbox/Details/5

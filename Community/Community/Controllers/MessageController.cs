@@ -68,7 +68,24 @@ namespace Community.Controllers
         public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
         {
             string sender = User.Identity.GetUserId();
-            string[] receivers = messageViewModel.Receiver.Split(',');
+            string[] receiveremails= messageViewModel.Receiver.Split(',');
+            List<string> receiverids = new List<string>();
+
+            foreach (string email in receiveremails)
+            {
+               ApplicationUser user =  db.Users.Where(u => u.Email.Equals(email)).Single<ApplicationUser>();
+                if(user==null){
+                    //TODO send error
+                }
+                else{
+                    receiverids.Add(user.Id);
+                }
+            }
+
+
+
+            string[] receivers = receiverids.ToArray();
+
             if (ModelState.IsValid)
             {
                 db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
