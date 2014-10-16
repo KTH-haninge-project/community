@@ -18,12 +18,16 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
 
+       
+
+      
+
         <dt>
-            @Html.DisplayNameFor(model => model.Receiver)
+            @Html.DisplayNameFor(model => model.Sender)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Receiver)
+            @Html.DisplayFor(model => model.Sender)
         </dd>
 
         <dt>
@@ -34,17 +38,8 @@
             @Html.DisplayFor(model => model.TheMessage)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Sender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sender)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
