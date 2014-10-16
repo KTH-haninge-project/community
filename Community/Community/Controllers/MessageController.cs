@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 namespace Community.Controllers
 {
@@ -114,21 +115,29 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            if (messageViewModel == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(messageViewModel);
+            return View(new MessageViewModel(message));
         }
 
         // POST: MessageViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
+        
         {
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            db.MesssagesViewModels.Remove(messageViewModel);
+           Debug.WriteLine("DELETE MESSAGE WITH ID " + id);
+
+            Message message = db.Messages.Find(id);
+            db.Messages.Remove(message);
+            List<ReadEntry> readentries = db.ReadEntries.Where(w => w.Message.Id == message.Id).ToList();
+            foreach (ReadEntry readentry in readentries)
+            {
+                db.ReadEntries.Remove(readentry);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
