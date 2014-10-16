@@ -28,7 +28,15 @@ namespace Community.Controllers
 
             foreach (ReadEntry entry in readEntries)
             {
-                messages.Add(new MessageViewModel(entry.Message));
+                MessageViewModel viewmodel = new MessageViewModel(entry.Message);
+                if (entry.hasRead())
+                {
+                    viewmodel.Read = entry.FirstReadTime.ToString();
+                }else{
+                    viewmodel.Read = "läs dina mail fucker";
+                }
+                messages.Add(viewmodel);
+
             }
             return View(messages);
         }
@@ -43,9 +51,10 @@ namespace Community.Controllers
             Message message = db.Messages.Find(id);
             MessageViewModel messageCopy = new MessageViewModel(message);
             //set read entry to viewed
-            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Equals(id)).Single();
+            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id).Single();
             if (!entry.hasRead()){
                 entry.FirstReadTime = System.DateTime.Now;
+                db.SaveChanges();
                 Debug.WriteLine("time read at "+entry.FirstReadTime);
             }
 

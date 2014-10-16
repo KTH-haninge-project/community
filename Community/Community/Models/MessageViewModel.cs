@@ -16,7 +16,7 @@ namespace Community.Models
 
         public Boolean Deleted { get; set; }
 
-        public DateTime Read { get; set; }
+        public String Read { get; set; }
 
         public string Title { get; set; }
 
