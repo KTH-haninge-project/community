@@ -10,13 +10,7 @@
     <h4>MessageViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TheMessage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TheMessage)
-        </dd>
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -32,6 +26,21 @@
 
         <dd>
             @Html.DisplayFor(model => model.Sender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Receiver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receiver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheMessage)
         </dd>
 
     </dl>
