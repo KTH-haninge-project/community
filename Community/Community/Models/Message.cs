@@ -12,6 +12,8 @@ namespace Community.Models
 
         public string Title { get; set; }
 
+        
+
         // Navigation property
         public string Sender { get; set; }
 

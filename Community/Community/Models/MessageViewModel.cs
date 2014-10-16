@@ -14,7 +14,9 @@ namespace Community.Models
     {
         public int Id { get; set; } // Id for Entity Framework and database
 
+        public Boolean Deleted { get; set; }
 
+        public DateTime Read { get; set; }
 
         public string Title { get; set; }
 
@@ -41,7 +43,7 @@ namespace Community.Models
                 Receiver += entry.Receiver + ", ";
             }
            
-           
+            
             this.TheMessage = message.TheMessage;
             var db = new ApplicationDbContext();
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();

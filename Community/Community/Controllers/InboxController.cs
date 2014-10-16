@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 
 namespace Community.Controllers
@@ -42,6 +43,13 @@ namespace Community.Controllers
             Message message = db.Messages.Find(id);
             MessageViewModel messageCopy = new MessageViewModel(message);
             //set read entry to viewed
+            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Equals(id)).Single();
+            if (!entry.hasRead()){
+                entry.FirstReadTime = System.DateTime.Now;
+                Debug.WriteLine("time read at "+entry.FirstReadTime);
+            }
+
+
             if (messageCopy == null)
             {
                 return HttpNotFound();
