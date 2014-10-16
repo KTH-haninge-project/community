@@ -92,11 +92,15 @@ namespace Community.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TheMessage,Title,Sender")] MessageViewModel messageViewModel)
+        public ActionResult Edit([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(messageViewModel).State = EntityState.Modified;
+                Message message = db.Messages.Find(messageViewModel.Id);
+                message.Id = messageViewModel.Id;
+                message.TheMessage = messageViewModel.TheMessage;
+                message.Title = messageViewModel.Title;
+                db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
