@@ -9,63 +9,65 @@ using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
 
+
 namespace Community.Controllers
 {
     [Authorize]
-    public class MessageController : Controller
+    public class InboxController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: MessageViewModels
+        // GET: Inbox
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
 
-            var messages = db.Messages.Where(m => m.Sender.Equals(currentuser)).ToList();
+            var messagesID = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)).ToList();
             List<MessageViewModel> messagemodels = new List<MessageViewModel>();
-
-            foreach (var message in messages)
+            List<Message> myMessage=new List<Message>();
+            foreach (var message in messagesID)
             {
-                messagemodels.Add(new MessageViewModel(message));
+                myMessage=db.Messages.Where(r => r.Id.Equals(message.Id)).ToList();
+                //messagemodels.Add(new MessageViewModel(message));
+            }
+            foreach (var myList in myMessage)
+            {
+                messagemodels.Add(new MessageViewModel(myList));
             }
             return View(messagemodels);
         }
 
-        // GET: MessageViewModels/Details/5
+        // GET: Inbox/Details/5
         public ActionResult Details(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Message message = db.Messages.Find(id);
-            if (message == null)
+            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
+            if (messageViewModel == null)
             {
                 return HttpNotFound();
             }
-
-            return View(new MessageViewModel(message));
+            return View(messageViewModel);
         }
 
-        // GET: MessageViewModels/Create
+        // GET: Inbox/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MessageViewModels/Create
+        // POST: Inbox/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
+        public ActionResult Create([Bind(Include = "Id,Title,Receiver,TheMessage,Sender")] MessageViewModel messageViewModel)
         {
-            string sender = User.Identity.GetUserId();
-            string[] receivers = { messageViewModel.Receiver };
             if (ModelState.IsValid)
             {
-                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
+                db.MesssagesViewModels.Add(messageViewModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,42 +75,38 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // GET: MessageViewModels/Edit/5
+        // GET: Inbox/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Message message = db.Messages.Find(id);
-            if (message==null)
+            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
+            if (messageViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(new MessageViewModel(message));
+            return View(messageViewModel);
         }
 
-        // POST: MessageViewModels/Edit/5
+        // POST: Inbox/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Title,Receiver,TheMessage,Sender")] MessageViewModel messageViewModel)
         {
             if (ModelState.IsValid)
             {
-                Message message = db.Messages.Find(messageViewModel.Id);
-                message.Id = messageViewModel.Id;
-                message.TheMessage = messageViewModel.TheMessage;
-                message.Title = messageViewModel.Title;
-                db.Entry(message).State = EntityState.Modified;
+                db.Entry(messageViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(messageViewModel);
         }
 
-        // GET: MessageViewModels/Delete/5
+        // GET: Inbox/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,7 +121,7 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // POST: MessageViewModels/Delete/5
+        // POST: Inbox/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
