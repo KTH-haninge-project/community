@@ -11,12 +11,11 @@ using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
-    [Authorize]
     public class MessageController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Message
+        // GET: MessageViewModels
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
@@ -31,9 +30,10 @@ namespace Community.Controllers
             return View(messagemodels);
         }
 
-        // GET: Message/Details/5
+        // GET: MessageViewModels/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,24 +47,24 @@ namespace Community.Controllers
             return View(new MessageViewModel(message));
         }
 
-        // GET: Message/Create
+        // GET: MessageViewModels/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Message/Create
+        // POST: MessageViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TheMessage,Title")] MessageViewModel messageViewModel)
+        public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
         {
             string sender = User.Identity.GetUserId();
-            string[] receivers={"hej"};
+            string[] receivers = { messageViewModel.Receiver };
             if (ModelState.IsValid)
             {
-                db.Messages.Add(new Message(messageViewModel.TheMessage,messageViewModel.Title,sender,receivers));
+                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -72,22 +72,22 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // GET: Message/Edit/5
+        // GET: MessageViewModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            if (messageViewModel == null)
+            Message message = db.Messages.Find(id);
+            if (message==null)
             {
                 return HttpNotFound();
             }
-            return View(messageViewModel);
+            return View(new MessageViewModel(message));
         }
 
-        // POST: Message/Edit/5
+        // POST: MessageViewModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -103,7 +103,7 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // GET: Message/Delete/5
+        // GET: MessageViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // POST: Message/Delete/5
+        // POST: MessageViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

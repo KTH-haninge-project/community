@@ -14,12 +14,16 @@ namespace Community.Models
     {
         public int Id { get; set; } // Id for Entity Framework and database
 
-         [Display(Name = "Message")]
-        public string TheMessage { get; set; }
+
 
         public string Title { get; set; }
 
-        // Navigation property
+         public string Receiver { get; set; }
+
+            [Display(Name = "Message")]
+        public string TheMessage { get; set; }
+
+
         public string Sender { get; set; }
 
         public MessageViewModel() 
@@ -30,13 +34,12 @@ namespace Community.Models
         public MessageViewModel(Message message)
         {
             this.Id = message.Id;
-            this.TheMessage = message.TheMessage;
             this.Title = message.Title;
+            this.Receiver = "Hårdkodat värde i MessageViewModel.cs";
+            this.TheMessage = message.TheMessage;
             var db = new ApplicationDbContext();
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
-
             this.Sender = lol.Email;
-
         }
 
 
