@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 namespace Community.Controllers
 {
@@ -26,7 +27,12 @@ namespace Community.Controllers
 
             foreach (var message in messages)
             {
-                messagemodels.Add(new MessageViewModel(message));
+                MessageViewModel viewmodel = new MessageViewModel(message);
+                if (viewmodel.TheMessage.Length > 15)
+                {
+                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                messagemodels.Add(viewmodel);
             }
             return View(messagemodels);
         }
@@ -62,7 +68,7 @@ namespace Community.Controllers
         public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
         {
             string sender = User.Identity.GetUserId();
-            string[] receivers = { messageViewModel.Receiver };
+            string[] receivers = messageViewModel.Receiver.Split(',');
             if (ModelState.IsValid)
             {
                 db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
@@ -115,21 +121,29 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            if (messageViewModel == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(messageViewModel);
+            return View(new MessageViewModel(message));
         }
 
         // POST: MessageViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
+        
         {
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            db.MesssagesViewModels.Remove(messageViewModel);
+           Debug.WriteLine("DELETE MESSAGE WITH ID " + id);
+
+            Message message = db.Messages.Find(id);
+            db.Messages.Remove(message);
+            List<ReadEntry> readentries = db.ReadEntries.Where(w => w.Message.Id == message.Id).ToList();
+            foreach (ReadEntry readentry in readentries)
+            {
+                db.ReadEntries.Remove(readentry);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
