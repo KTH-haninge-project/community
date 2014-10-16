@@ -39,66 +39,14 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            if (messageViewModel == null)
+            Message message = db.Messages.Find(id);
+            MessageViewModel messageCopy = new MessageViewModel(message);
+            //set read entry to viewed
+            if (messageCopy == null)
             {
                 return HttpNotFound();
             }
-            return View(messageViewModel);
-        }
-
-        // GET: Inbox/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Inbox/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Receiver,TheMessage,Sender")] MessageViewModel messageViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MesssagesViewModels.Add(messageViewModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(messageViewModel);
-        }
-
-        // GET: Inbox/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            if (messageViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(messageViewModel);
-        }
-
-        // POST: Inbox/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Receiver,TheMessage,Sender")] MessageViewModel messageViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(messageViewModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(messageViewModel);
+            return View(messageCopy);
         }
 
         // GET: Inbox/Delete/5
