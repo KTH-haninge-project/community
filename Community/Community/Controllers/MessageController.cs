@@ -26,7 +26,12 @@ namespace Community.Controllers
 
             foreach (var message in messages)
             {
-                messagemodels.Add(new MessageViewModel(message));
+                MessageViewModel viewmodel = new MessageViewModel(message);
+                if (viewmodel.TheMessage.Length > 15)
+                {
+                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                messagemodels.Add(viewmodel);
             }
             return View(messagemodels);
         }
@@ -62,7 +67,7 @@ namespace Community.Controllers
         public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
         {
             string sender = User.Identity.GetUserId();
-            string[] receivers = { messageViewModel.Receiver };
+            string[] receivers = messageViewModel.Receiver.Split(',');
             if (ModelState.IsValid)
             {
                 db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
