@@ -33,11 +33,13 @@ namespace Community.Controllers
                 {
                     viewmodel.Read = entry.FirstReadTime.ToString();
                 }else{
-                    viewmodel.Read = "läs dina mail fucker";
+                    viewmodel.Read = "[NEW]";
                 }
                 messages.Add(viewmodel);
 
             }
+
+            messages.Reverse();
             return View(messages);
         }
 

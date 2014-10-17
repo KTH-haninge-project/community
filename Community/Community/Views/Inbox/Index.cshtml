@@ -8,6 +8,7 @@
 @using (Html.BeginForm("MarkAsRead","Inbox"))
 {
     <table class="table">
+        <input type="submit" value="Mark selected as read" />
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Sent)
@@ -27,34 +28,87 @@
 
             <th></th>
         </tr>
+        @{
+    int newcounter = 0;
+    int oldcounter = 0;
+        }
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Read)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TheMessage)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-                <td><input id="@item.Id" name="marker" type="checkbox" value="@item.Id" /></td>
-            </tr>
+            bool isNew = item.Read.Equals("[NEW]");
+            if (isNew)
+            {
+                newcounter++;
+            }
+            else
+            {
+                oldcounter++;
+            }
+                <tr>
+                    <td>
+                        @if (isNew)
+                        {
+                            Output.Write("<b><font color=\"#00AA00\">");
+                        }
+                        @Html.DisplayFor(modelItem => item.Sent)
+                        @if (isNew)
+                        {
+                            Output.Write("</font></b>");
+                        }
+                    </td>
+                    <td>
+                        @if (isNew)
+                        {
+                            Output.Write("<b><font color=\"#00AA00\">");
+                        }
+                        @Html.DisplayFor(modelItem => item.Read)
+                        @if (isNew)
+                        {
+                            Output.Write("</font></b>");
+                        }
+                    </td>
+                    <td>
+                        @if (isNew)
+                        {
+                            Output.Write("<b><font color=\"#00AA00\">");
+                        }
+                        @Html.DisplayFor(modelItem => item.Title)
+                        @if (isNew)
+                        {
+                            Output.Write("</font></b>");
+                        }
+                    </td>
+                    <td>
+                        @if (isNew)
+                        {
+                            Output.Write("<b><font color=\"#00AA00\">");
+                        }
+                        @Html.DisplayFor(modelItem => item.Sender)
+                        @if (isNew)
+                        {
+                            Output.Write("</font></b>");
+                        }
+                    </td>
+                    <td>
+                        @if (isNew)
+                        {
+                            Output.Write("<b><font color=\"#00AA00\">");
+                        }
+                        @Html.DisplayFor(modelItem => item.TheMessage)
+                        @if (isNew)
+                        {
+                            Output.Write("</font></b>");
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                    <td><input id="@item.Id" name="marker" type="checkbox" value="@item.Id" /></td>
+                </tr>
         }
 
     </table>
-    <input type="submit" value="Submit" />
+    Output.Write("New: "+newcounter+"<br>Old: "+oldcounter+"<br>");
 }
 

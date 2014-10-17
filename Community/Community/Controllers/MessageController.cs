@@ -34,6 +34,7 @@ namespace Community.Controllers
                 }
                 messagemodels.Add(viewmodel);
             }
+            messagemodels.Reverse();
             return View(messagemodels);
         }
 
