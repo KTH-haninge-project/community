@@ -165,6 +165,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410161403362_InitialCreate.cs" />
+    <Compile Include="Migrations\201410161403362_InitialCreate.Designer.cs">
+      <DependentUpon>201410161403362_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410171219202_test1.cs" />
+    <Compile Include="Migrations\201410171219202_test1.Designer.cs">
+      <DependentUpon>201410171219202_test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410171220165_testadd.cs" />
+    <Compile Include="Migrations\201410171220165_testadd.Designer.cs">
+      <DependentUpon>201410171220165_testadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -178,6 +191,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\selectfilter.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -193,9 +207,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mootools-1.2.4-core-yc.js" />
+    <Content Include="Scripts\mootools-1.2.4.4-more.js" />
+    <Content Include="Scripts\multipleSelectFilter.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Message\assets\close.png" />
+    <Content Include="Views\Message\assets\icon-accept.png" />
+    <Content Include="Views\Message\assets\icon-refresh.png" />
+    <Content Include="Views\Message\assets\icon-search.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -244,6 +265,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410161403362_InitialCreate.resx">
+      <DependentUpon>201410161403362_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171219202_test1.resx">
+      <DependentUpon>201410171219202_test1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171220165_testadd.resx">
+      <DependentUpon>201410171220165_testadd.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

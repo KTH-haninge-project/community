@@ -1,5 +1,5 @@
 ﻿@model Community.Models.MessageViewModel
-
+<!--@Styles.Render("~/Content/css")-->
 @{
     ViewBag.Title = "Create";
 }
@@ -8,10 +8,7 @@
 <script type="text/javascript" src="js/mootools-1.2.4-core-yc.js"></script>
 <script type="text/javascript" src="js/mootools-1.2.4.4-more.js"></script>
 <script type="text/javascript" src="js/multipleSelectFilter.js"></script>-->
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/mootools-1.2.4-core-yc.js")
-@Scripts.Render("~/bundles/mootools-1.2.4.4-more.js")
-@Scripts.Render("~/bundles/multipleSelectFilter.js")
+
 
 
 <h2>Create</h2>
@@ -49,7 +46,9 @@
                 </datalist>
                         -->
                 @{//foreach//user in db}
+                  }
 <select id="listid" name="lsitname" title="hover" class="lists searchables" multiple="multiple" tabindex="2">
+    <option value="opt1">opt1</option>
     <option value="@{}">@{}</option>  
 </select>
             </div>
@@ -77,4 +76,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/mootools-1.2.4-core-yc.js")
+@Scripts.Render("~/Scripts/mootools-1.2.4.4-more.js")
+@Scripts.Render("~/Scripts/multipleSelectFilter.js")
+<!--
+<script type="text/javascript" src="~/Scripts/mootools-1.2.4-core-yc.js"></script>
+<script type="text/javascript" src="~/Scripts/mootools-1.2.4.4-more.js"></script>
+<script type="text/javascript" src="~/Scripts/multipleSelectFilter.js"></script>-->
 }
