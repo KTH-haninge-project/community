@@ -1,8 +1,15 @@
 ﻿@model Community.Models.MessageViewModel
-
+<!--@Styles.Render("~/Content/css")-->
 @{
     ViewBag.Title = "Create";
 }
+<!--
+<link rel="stylesheet" href="css/selectfilter.css">
+<script type="text/javascript" src="js/mootools-1.2.4-core-yc.js"></script>
+<script type="text/javascript" src="js/mootools-1.2.4.4-more.js"></script>
+<script type="text/javascript" src="js/multipleSelectFilter.js"></script>-->
+
+
 
 <h2>Create</h2>
 
@@ -30,6 +37,20 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Receiver, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Receiver, "", new { @class = "text-danger" })
+                <!--
+                <input type=text list=recv>
+                <datalist id=recv>
+                   
+                    <option value="Firefox">
+                   
+                </datalist>
+                        -->
+                @{//foreach//user in db}
+                  }
+<select id="listid" name="lsitname" title="hover" class="lists searchables" multiple="multiple" tabindex="2">
+    <option value="opt1">opt1</option>
+    <option value="@{}">@{}</option>  
+</select>
             </div>
         </div>
 
@@ -55,4 +76,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/mootools-1.2.4-core-yc.js")
+@Scripts.Render("~/Scripts/mootools-1.2.4.4-more.js")
+@Scripts.Render("~/Scripts/multipleSelectFilter.js")
+<!--
+<script type="text/javascript" src="~/Scripts/mootools-1.2.4-core-yc.js"></script>
+<script type="text/javascript" src="~/Scripts/mootools-1.2.4.4-more.js"></script>
+<script type="text/javascript" src="~/Scripts/multipleSelectFilter.js"></script>-->
 }

@@ -1,0 +1,6 @@
+//in nuget console 
+//init first time
+ Enable-Migrations
+ //every time db context changed 
+ Add-Migration
+ Update-Database
