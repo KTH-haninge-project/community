@@ -41,6 +41,32 @@ namespace Community.Controllers
             return View(messages);
         }
 
+        [HttpPost, ActionName("MarkAsRead")]
+        public ActionResult Index(FormCollection collection)
+        {
+            string currentuser = User.Identity.GetUserId();
+            //Do stuff with formCollection
+            Debug.WriteLine("Index-contrller with formcollection called");
+            
+
+             if (ModelState.IsValid){
+                 foreach (string _formData in collection)
+                 {
+                     string id = collection[_formData];
+                     int idnumber = Convert.ToInt32(id);
+                     ReadEntry entry = db.ReadEntries.Where(r => r.Message.Id == idnumber && r.Receiver.Equals(currentuser)).Single();
+                     if (!entry.hasRead())
+                     {
+                         entry.FirstReadTime = System.DateTime.Now;
+                     }
+                 }
+
+                 db.SaveChanges();
+             }
+
+            return RedirectToAction("Index", "Inbox");
+        }
+
         // GET: Inbox/Details/5
         public ActionResult Details(int? id)
         {
@@ -93,7 +119,6 @@ namespace Community.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

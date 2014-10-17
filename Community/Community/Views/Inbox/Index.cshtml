@@ -5,51 +5,56 @@
 }
 
 <h2>Index</h2>
+@using (Html.BeginForm("MarkAsRead","Inbox"))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Read)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TheMessage)
+            </th>
 
+            <th></th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Sent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Read)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sender)
-        </th>    
-        <th>
-            @Html.DisplayNameFor(model => model.TheMessage)
-        </th>
-        
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Read)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sender)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sent)
                 </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TheMessage)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Read)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TheMessage)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+                <td><input id="@item.Id" name="marker" type="checkbox" value="@item.Id" /></td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="Submit" />
 }
 
-</table>
