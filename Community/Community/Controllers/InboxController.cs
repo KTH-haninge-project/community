@@ -22,7 +22,7 @@ namespace Community.Controllers
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
-            List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)).ToList<ReadEntry>();
+            List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)&&r.Active).ToList<ReadEntry>();
 
             List<MessageViewModel> messages = new List<MessageViewModel>();
 
@@ -73,7 +73,7 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
+            MessageViewModel messageViewModel = new MessageViewModel(db.Messages.Find(id));
             if (messageViewModel == null)
             {
                 return HttpNotFound();
@@ -86,8 +86,10 @@ namespace Community.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MessageViewModel messageViewModel = db.MesssagesViewModels.Find(id);
-            db.MesssagesViewModels.Remove(messageViewModel);
+            string receiver = User.Identity.GetUserId();
+            Message message = db.Messages.Find(id);
+            ReadEntry readentry = db.ReadEntries.Where(r => r.Message.Id == message.Id&&r.Receiver.Equals(receiver)).Single();
+            readentry.Active = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

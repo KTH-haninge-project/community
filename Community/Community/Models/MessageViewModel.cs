@@ -48,8 +48,12 @@ namespace Community.Models
             {
                 ApplicationUser user = db.Users.Find(entry.Receiver);
                 Receiver += user.Email + ", ";
+            
             }
-            Receiver = Receiver.Remove(Receiver.Length-2);
+            if (!Receiver.Equals(""))
+            {
+                Receiver = Receiver.Remove(Receiver.Length - 2);
+            }
             Debug.WriteLine("Receiver: "+Receiver);
             this.TheMessage = message.TheMessage;
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();

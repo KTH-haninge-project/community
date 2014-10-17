@@ -19,6 +19,8 @@ namespace Community.Models
 
         public string Receiver { get; set; }
 
+        public bool Active { get; set; }
+
         public bool hasRead()
         {
             return (FirstReadTime != null);
@@ -29,6 +31,7 @@ namespace Community.Models
             FirstReadTime = null;
             this.Message = message;
             this.Receiver = receiver;
+            this.Active = true;
         }
     }
 
