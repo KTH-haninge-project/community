@@ -1,29 +1,30 @@
-﻿@model IEnumerable<Community.Models.MessageViewModel>
+﻿@model Community.Models.InboxViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+@using Community.Models
 @using (Html.BeginForm("MarkAsRead","Inbox"))
 {
+       <input type="submit" value="Mark selected as read" />
     <table class="table">
-        <input type="submit" value="Mark selected as read" />
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Sent)
+                Sent
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Read)
+                Read
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+               Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sender)
+                Sender
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TheMessage)
+                Message
             </th>
 
             <th></th>
@@ -31,9 +32,11 @@
         @{
     int newcounter = 0;
     int oldcounter = 0;
+
+    List<MessageViewModel> messages = Model.messages;
         }
 
-        @foreach (var item in Model)
+        @foreach (var item in messages)
         {
             bool isNew = item.Read.Equals("[NEW]");
             if (isNew)
@@ -109,6 +112,6 @@
         }
 
     </table>
-    Output.Write("New: "+newcounter+"<br>Old: "+oldcounter+"<br>");
+    Output.Write("New: "+newcounter+"<br>Old: "+oldcounter+"<br>Deleted: "+Model.DeletedCount);
 }
 

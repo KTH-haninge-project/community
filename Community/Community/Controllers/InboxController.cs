@@ -23,7 +23,7 @@ namespace Community.Controllers
         {
             string currentuser = User.Identity.GetUserId();
             List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)&&r.Active).ToList<ReadEntry>();
-
+            int countDeleted = db.ReadEntries.Count(r => r.Receiver.Equals(currentuser) && !(r.Active));
             List<MessageViewModel> messages = new List<MessageViewModel>();
 
             foreach (ReadEntry entry in readEntries)
@@ -40,7 +40,8 @@ namespace Community.Controllers
             }
 
             messages.Reverse();
-            return View(messages);
+            InboxViewModel inboxview= new InboxViewModel(messages, countDeleted);
+            return View(inboxview);
         }
 
         [HttpPost, ActionName("MarkAsRead")]

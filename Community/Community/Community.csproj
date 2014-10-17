@@ -168,6 +168,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InboxViewModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\ReadEntry.cs" />
