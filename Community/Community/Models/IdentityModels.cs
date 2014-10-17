@@ -19,10 +19,10 @@ namespace Community.Models
         }
 
         // Navigation property
-        public virtual ICollection<Message> SentMessages { get; set; }
+     //   public virtual ICollection<Message> SentMessages { get; set; }
         public ApplicationUser()
         {
-            SentMessages = new List<Message>();
+     //       SentMessages = new List<Message>();
         }
     }
 
@@ -40,7 +40,7 @@ namespace Community.Models
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<ReadEntry> ReadEntries { get; set; }
-
-        public System.Data.Entity.DbSet<Community.Models.MessageViewModel> MesssagesViewModels { get; set; }
+        // Pretty stupid line
+       // public System.Data.Entity.DbSet<Community.Models.MessageViewModel> MesssagesViewModels { get; set; }
     }
 }
