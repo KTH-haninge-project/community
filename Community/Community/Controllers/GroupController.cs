@@ -27,10 +27,9 @@ namespace Community.Controllers
                 GroupViewModel viewmodel = new GroupViewModel(group);
                 if (group.God.Equals(user))
                 {
-                    viewmodel.isMember = true;
                     viewmodel.isOwner = true;
                 }
-                else if(group.Members.Contains(user)){
+                if(group.Members.Contains(user)){
                     viewmodel.isMember=true;
                 }
                 else{
