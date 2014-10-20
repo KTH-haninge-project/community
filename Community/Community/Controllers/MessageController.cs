@@ -58,7 +58,20 @@ namespace Community.Controllers
         // GET: MessageViewModels/Create
         public ActionResult Create()
         {
-            return View();
+
+            MessageViewModel mvm=new MessageViewModel();
+            List<ApplicationUser> users = db.Users.ToList();
+            List<Group> gruops = db.Groups.ToList();
+            foreach (ApplicationUser user in users)
+            {
+                mvm.addressSpace.Add(user.Email);
+            }
+            foreach (Group group in gruops)
+            {
+                mvm.addressSpace.Add(group.Name);
+            }
+
+            return View(mvm);
         }
 
         // POST: MessageViewModels/Create
@@ -66,27 +79,39 @@ namespace Community.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
+        public ActionResult Create([Bind(Include = "Id,TheMessage,Title,recvList")] MessageViewModel messageViewModel)
         {
             string sender = User.Identity.GetUserId();
-            string[] receiveremails= messageViewModel.Receiver.Split(',');
+            
+            //string[] receiveremails= messageViewModel.Receiver.Split(',');
+            List<string> receiveremails = messageViewModel.recvList;
+
             List<string> receiverids = new List<string>();
 
             foreach (string email in receiveremails)
             {
                ApplicationUser user =  db.Users.Where(u => u.Email.Equals(email)).Single<ApplicationUser>();
                 if(user==null){
-                    //TODO send error
+                    Group tempgroup =db.Groups.Where(g => g.Name.Equals(email)).Single<Group>();
+                    if (tempgroup == null)
+                    {
+                        //TODO send error
+                    }
+                    else
+                    {
+                        foreach(ApplicationUser userid in tempgroup.Members)
+                        {
+                            receiverids.Add(userid.Email);
+                        }
+                    }
                 }
                 else{
                     receiverids.Add(user.Id);
                 }
             }
 
-
-
             string[] receivers = receiverids.ToArray();
-
+            
             if (ModelState.IsValid)
             {
                 db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));

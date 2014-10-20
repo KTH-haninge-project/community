@@ -21,6 +21,9 @@ namespace Community.Models
 
         public String Sent { get; set; }
 
+        public List<String> addressSpace { get; set; }
+        
+        public List<String> recvList { get; set; }
 
         public string Title { get; set; }
 
@@ -33,7 +36,9 @@ namespace Community.Models
         public string Sender { get; set; }
 
         public MessageViewModel() 
-        { 
+        {
+            addressSpace = new List<String>();
+            recvList = new List<string>();
         //empty constructor 
         }
 
@@ -58,7 +63,13 @@ namespace Community.Models
             this.TheMessage = message.TheMessage;
             var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
             this.Sender = lol.Email;
+            addressSpace=new List<String>();
+
+            recvList = new List<string>();
+
+            
         }
+
 
 
     }
