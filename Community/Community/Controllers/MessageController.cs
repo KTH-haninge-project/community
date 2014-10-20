@@ -61,7 +61,8 @@ namespace Community.Controllers
 
             MessageViewModel mvm=new MessageViewModel();
             List<ApplicationUser> users = db.Users.ToList();
-            List<Group> gruops = db.Groups.ToList();
+            List<Group> gruops = db.Users.Find(User.Identity.GetUserId()).GroupMemberships.ToList();
+
             foreach (ApplicationUser user in users)
             {
                 mvm.addressSpace.Add(user.Email);
