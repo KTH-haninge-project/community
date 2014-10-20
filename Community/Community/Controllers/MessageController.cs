@@ -128,6 +128,12 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             return View(new MessageViewModel(message));
         }
 
@@ -141,6 +147,11 @@ namespace Community.Controllers
             if (ModelState.IsValid)
             {
                 Message message = db.Messages.Find(messageViewModel.Id);
+                string currentuser = User.Identity.GetUserId();
+                if (!message.Sender.Equals(currentuser))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
                 message.Id = messageViewModel.Id;
                 message.TheMessage = messageViewModel.TheMessage;
                 message.Title = messageViewModel.Title;
@@ -163,6 +174,11 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(new MessageViewModel(message));
         }
 
@@ -175,6 +191,11 @@ namespace Community.Controllers
            Debug.WriteLine("DELETE MESSAGE WITH ID " + id);
 
             Message message = db.Messages.Find(id);
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             db.Messages.Remove(message);
             List<ReadEntry> readentries = db.ReadEntries.Where(w => w.Message.Id == message.Id).ToList();
             foreach (ReadEntry readentry in readentries)
