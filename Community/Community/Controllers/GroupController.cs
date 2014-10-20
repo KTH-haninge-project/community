@@ -64,7 +64,6 @@ namespace Community.Controllers
             {
                 viewmodel.isMember = true;
             }
-            viewmodel.Members.Add(group.God.Email);
             return View(viewmodel);
         }
 
