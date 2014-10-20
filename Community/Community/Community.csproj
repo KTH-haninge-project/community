@@ -194,6 +194,14 @@
     <Compile Include="Migrations\201410201033480_dfg.Designer.cs">
       <DependentUpon>201410201033480_dfg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410201147585_addedgroups.cs" />
+    <Compile Include="Migrations\201410201147585_addedgroups.Designer.cs">
+      <DependentUpon>201410201147585_addedgroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410201202582_added_addressSpace.cs" />
+    <Compile Include="Migrations\201410201202582_added_addressSpace.Designer.cs">
+      <DependentUpon>201410201202582_added_addressSpace.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Group.cs" />
@@ -311,6 +319,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410201033480_dfg.resx">
       <DependentUpon>201410201033480_dfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410201147585_addedgroups.resx">
+      <DependentUpon>201410201147585_addedgroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410201202582_added_addressSpace.resx">
+      <DependentUpon>201410201202582_added_addressSpace.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
