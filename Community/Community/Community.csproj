@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InboxController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -177,8 +178,25 @@
     <Compile Include="Migrations\201410171220165_testadd.Designer.cs">
       <DependentUpon>201410171220165_testadd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410200938066_test.cs" />
+    <Compile Include="Migrations\201410200938066_test.Designer.cs">
+      <DependentUpon>201410200938066_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410201000574_sdfd.cs" />
+    <Compile Include="Migrations\201410201000574_sdfd.Designer.cs">
+      <DependentUpon>201410201000574_sdfd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410201010185_gfdf.cs" />
+    <Compile Include="Migrations\201410201010185_gfdf.Designer.cs">
+      <DependentUpon>201410201010185_gfdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410201033480_dfg.cs" />
+    <Compile Include="Migrations\201410201033480_dfg.Designer.cs">
+      <DependentUpon>201410201033480_dfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InboxViewModel.cs" />
@@ -256,6 +274,11 @@
     <Content Include="Views\Inbox\Delete.cshtml" />
     <Content Include="Views\Inbox\Details.cshtml" />
     <Content Include="Views\Inbox\Index.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Delete.cshtml" />
+    <Content Include="Views\Group\Details.cshtml" />
+    <Content Include="Views\Group\Edit.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -276,6 +299,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410171220165_testadd.resx">
       <DependentUpon>201410171220165_testadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410200938066_test.resx">
+      <DependentUpon>201410200938066_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410201000574_sdfd.resx">
+      <DependentUpon>201410201000574_sdfd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410201010185_gfdf.resx">
+      <DependentUpon>201410201010185_gfdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410201033480_dfg.resx">
+      <DependentUpon>201410201033480_dfg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
