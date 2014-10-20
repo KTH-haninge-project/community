@@ -87,6 +87,7 @@ namespace Community.Controllers
                 group.Id = groupViewModel.Id;
                 group.Name = groupViewModel.Name;
                 group.God = db.Users.Find(User.Identity.GetUserId());
+                group.AddMember(group.God);
                 group.Description = groupViewModel.Description;
                 db.Groups.Add(group);
                 db.SaveChanges();

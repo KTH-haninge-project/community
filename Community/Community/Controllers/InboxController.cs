@@ -77,10 +77,11 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            string currentuser = User.Identity.GetUserId();
             Message message = db.Messages.Find(id);
             MessageViewModel messageCopy = new MessageViewModel(message);
             //set read entry to viewed
-            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id).Single();
+            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id && r.Receiver.Equals(currentuser)).Single();
             if (!entry.hasRead()){
                 entry.FirstReadTime = System.DateTime.Now;
                 db.SaveChanges();

@@ -88,33 +88,27 @@ namespace Community.Controllers
 
             List<string> receiverids = new List<string>();
 
-            foreach (string email in receiveremails)
+            foreach (string receivername in receiveremails)
             {
-               ApplicationUser user =  db.Users.Where(u => u.Email.Equals(email)).Single<ApplicationUser>();
-                if(user==null){
-                    Group tempgroup =db.Groups.Where(g => g.Name.Equals(email)).Single<Group>();
-                    if (tempgroup == null)
-                    {
-                        //TODO send error
-                    }
-                    else
-                    {
-                        foreach(ApplicationUser userid in tempgroup.Members)
-                        {
-                            receiverids.Add(userid.Email);
-                        }
-                    }
+                if (IsValidEmail(receivername)) // Receiver is a email address
+                {
+                    ApplicationUser receiver = db.Users.Where(u => u.Email.Equals(receivername)).Single();
+                    receiverids.Add(receiver.Id);
                 }
-                else{
-                    receiverids.Add(user.Id);
+                else // Receiver is a group
+                {
+                    Group group = db.Groups.Where(g => g.Name.Equals(receivername)).Single();
+
+                    foreach (ApplicationUser user in group.Members)
+                    {
+                        receiverids.Add(user.Id);
+                    }
                 }
             }
-
-            string[] receivers = receiverids.ToArray();
             
             if (ModelState.IsValid)
             {
-                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
+                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receiverids.ToArray()));
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -199,5 +193,19 @@ namespace Community.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
+  
 }
