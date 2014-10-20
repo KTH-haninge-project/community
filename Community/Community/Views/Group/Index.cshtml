@@ -60,6 +60,11 @@
        @Html.Raw(" | ")
        @Html.ActionLink("Join Group", "JoinGroup", new { id = item.Id })
     }
+    else
+    {
+        @Html.Raw(" | ")
+        @Html.ActionLink("Leave Group", "LeaveGroup", new { id = item.Id })
+    }
 }
 
         </td>

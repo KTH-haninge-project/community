@@ -108,6 +108,14 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             return View(new GroupViewModel(group));
         }
 
@@ -121,6 +129,12 @@ namespace Community.Controllers
             if (ModelState.IsValid)
             {
                 Group group = db.Groups.Find(groupViewModel.Id);
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                if (!group.God.Equals(user))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
                 group.Name = groupViewModel.Name;
                 group.Description = groupViewModel.Description;
                 db.SaveChanges();
@@ -141,6 +155,11 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(new GroupViewModel(group));
         }
         // POST: Group/Delete/5
@@ -149,6 +168,11 @@ namespace Community.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Group group = db.Groups.Find(id);
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             db.Groups.Remove(group);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -173,6 +197,28 @@ namespace Community.Controllers
             {
                 group.AddMember(user);
                 Debug.WriteLine("Number of members in group after add: " + group.Members.Count);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult LeaveGroup(GroupViewModel groupViewModel)
+        {
+            if (groupViewModel == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = db.Groups.Find(groupViewModel.Id);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+            if (group.Members.Contains(user))
+            {
+                group.RemoveMember(user);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
