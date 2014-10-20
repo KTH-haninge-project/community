@@ -1,0 +1,5 @@
+sqllocaldb.exe stop v11.0
+
+sqllocaldb.exe delete v11.0
+
+Update-Database
