@@ -94,7 +94,10 @@ namespace Community.Controllers
                 if (IsValidEmail(receivername)) // Receiver is a email address
                 {
                     ApplicationUser receiver = db.Users.Where(u => u.Email.Equals(receivername)).Single();
-                    receiverids.Add(receiver.Id);
+                    if (!receiverids.Contains(receiver.Id))
+                    {
+                        receiverids.Add(receiver.Id);
+                    }
                 }
                 else // Receiver is a group
                 {
@@ -102,7 +105,10 @@ namespace Community.Controllers
 
                     foreach (ApplicationUser user in group.Members)
                     {
-                        receiverids.Add(user.Id);
+                        if (!receiverids.Contains(user.Id))
+                        {
+                            receiverids.Add(user.Id);
+                        }
                     }
                 }
             }
