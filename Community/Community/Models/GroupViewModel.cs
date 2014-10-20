@@ -15,6 +15,8 @@ namespace Community.Models
         public List<String> Members { get; set; }
         public Boolean isMember { get; set; }
 
+        public Boolean isOwner { get; set; }
+
         public GroupViewModel()
         {
 
@@ -22,6 +24,7 @@ namespace Community.Models
 
         public GroupViewModel(Group group)
         {
+            this.isOwner = false;
             this.isMember = false;
             this.Name = group.Name;
             this.Description = group.Description;

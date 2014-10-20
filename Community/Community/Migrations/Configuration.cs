@@ -10,7 +10,6 @@ namespace Community.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Community.Models.ApplicationDbContext";
         }
 
         protected override void Seed(Community.Models.ApplicationDbContext context)

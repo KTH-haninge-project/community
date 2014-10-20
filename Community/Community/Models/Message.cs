@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 namespace Community.Models
 {
     public class Message
@@ -37,6 +38,6 @@ namespace Community.Models
         public Message()
         {
             ReadEntries = new List<ReadEntry>();
-        }
+        } 
     }
 }

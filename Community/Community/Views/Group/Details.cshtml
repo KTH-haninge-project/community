@@ -41,6 +41,12 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @{
+        if (Model.isMember)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+            @Html.Raw(" | ")
+        }
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>
