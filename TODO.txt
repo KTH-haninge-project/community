@@ -1,0 +1,17 @@
+TODO:
+
+
+Krav på lösningen:
+* Bättre Metod- och datamedlemsnamn
+* Dokumentation
+
+Grundkrav betyg 3:
+* Indexsida: Senast inloggning, antalet inloggningar senast emånaden, antalet olästa meddelanden.
+* När en avsändare väljs visas en lista med rubrik och tidsstämpel på meddelanden från just 
+denna användare.
+* 
+
+Krav på implementationen:
+* ORM kanske inte används korrekt överallt?
+* Irrelevanta metoder/sidor ska tas bort
+

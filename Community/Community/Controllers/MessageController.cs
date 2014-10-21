@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
+using Community.ViewModels;
 
 namespace Community.Controllers
 {
@@ -33,6 +34,10 @@ namespace Community.Controllers
                 if (viewmodel.TheMessage.Length > 15)
                 {
                     viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                if (viewmodel.Title.Length > 15)
+                {
+                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
                 }
                 messagemodels.Add(viewmodel);
             }
@@ -63,7 +68,8 @@ namespace Community.Controllers
 
             MessageViewModel mvm=new MessageViewModel();
             List<ApplicationUser> users = db.Users.ToList();
-            List<Group> gruops = db.Groups.ToList();
+            List<Group> gruops = db.Users.Find(User.Identity.GetUserId()).GroupMemberships.ToList();
+
             foreach (ApplicationUser user in users)
             {
                 mvm.addressSpace.Add(user.Email);
@@ -90,33 +96,33 @@ namespace Community.Controllers
 
             List<string> receiverids = new List<string>();
 
-            foreach (string email in receiveremails)
+            foreach (string receivername in receiveremails)
             {
-               ApplicationUser user =  db.Users.Where(u => u.Email.Equals(email)).Single<ApplicationUser>();
-                if(user==null){
-                    Group tempgroup =db.Groups.Where(g => g.Name.Equals(email)).Single<Group>();
-                    if (tempgroup == null)
+                if (IsValidEmail(receivername)) // Receiver is a email address
+                {
+                    ApplicationUser receiver = db.Users.Where(u => u.Email.Equals(receivername)).Single();
+                    if (!receiverids.Contains(receiver.Id))
                     {
-                        //TODO send error
+                        receiverids.Add(receiver.Id);
                     }
-                    else
+                }
+                else // Receiver is a group
+                {
+                    Group group = db.Groups.Where(g => g.Name.Equals(receivername)).Single();
+
+                    foreach (ApplicationUser user in group.Members)
                     {
-                        foreach(ApplicationUser userid in tempgroup.Members)
+                        if (!receiverids.Contains(user.Id))
                         {
-                            receiverids.Add(userid.Email);
+                            receiverids.Add(user.Id);
                         }
                     }
                 }
-                else{
-                    receiverids.Add(user.Id);
-                }
             }
-
-            string[] receivers = receiverids.ToArray();
             
             if (ModelState.IsValid)
             {
-                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receivers));
+                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receiverids.ToArray()));
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -136,6 +142,12 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             return View(new MessageViewModel(message));
         }
 
@@ -149,6 +161,11 @@ namespace Community.Controllers
             if (ModelState.IsValid)
             {
                 Message message = db.Messages.Find(messageViewModel.Id);
+                string currentuser = User.Identity.GetUserId();
+                if (!message.Sender.Equals(currentuser))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
                 message.Id = messageViewModel.Id;
                 message.TheMessage = messageViewModel.TheMessage;
                 message.Title = messageViewModel.Title;
@@ -171,6 +188,11 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(new MessageViewModel(message));
         }
 
@@ -183,6 +205,11 @@ namespace Community.Controllers
            Debug.WriteLine("DELETE MESSAGE WITH ID " + id);
 
             Message message = db.Messages.Find(id);
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             db.Messages.Remove(message);
             List<ReadEntry> readentries = db.ReadEntries.Where(w => w.Message.Id == message.Id).ToList();
             foreach (ReadEntry readentry in readentries)
@@ -201,5 +228,19 @@ namespace Community.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
+  
 }

@@ -1,4 +1,4 @@
-﻿@model Community.Models.GroupViewModel
+﻿@model Community.ViewModels.GroupViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -41,6 +41,23 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @{
+        if (Model.isOwner)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+            @Html.Raw(" | ")
+        }
+        if (Model.isMember)
+        {
+            @Html.ActionLink("Leave Group", "LeaveGroup", new { id = Model.Id })
+            @Html.Raw(" | ")
+        }
+        else
+        {
+            @Html.ActionLink("Join Group", "JoinGroup", new { id = Model.Id })
+            @Html.Raw(" | ")
+        }
+
+}
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using Community.Models;
+using Community.ViewModels;
 
 namespace Community.Controllers
 {

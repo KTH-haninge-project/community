@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Community.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Community.Models
+namespace Community.ViewModels
 {
     public class GroupViewModel
     {
@@ -15,6 +16,8 @@ namespace Community.Models
         public List<String> Members { get; set; }
         public Boolean isMember { get; set; }
 
+        public Boolean isOwner { get; set; }
+
         public GroupViewModel()
         {
 
@@ -22,6 +25,7 @@ namespace Community.Models
 
         public GroupViewModel(Group group)
         {
+            this.isOwner = false;
             this.isMember = false;
             this.Name = group.Name;
             this.Description = group.Description;

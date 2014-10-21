@@ -1,11 +1,11 @@
-﻿@model Community.Models.InboxViewModel
+﻿@model Community.ViewModels.InboxViewModel
 
 @{
     ViewBag.Title = "Inbox";
 }
 
 <h2>Inbox</h2>
-@using Community.Models
+@using Community.ViewModels
 @using (Html.BeginForm("MarkAsRead","Inbox"))
 {
        <input type="submit" value="Mark selected as read" />

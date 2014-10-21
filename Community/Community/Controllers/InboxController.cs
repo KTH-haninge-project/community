@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
+using Community.ViewModels;
 
 
 namespace Community.Controllers
@@ -35,6 +36,14 @@ namespace Community.Controllers
                 }else{
                     viewmodel.Read = "[NEW]";
                 }
+                if (viewmodel.TheMessage.Length > 15)
+                {
+                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                if (viewmodel.Title.Length > 15)
+                {
+                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
+                }
                 messages.Add(viewmodel);
 
             }
@@ -56,6 +65,7 @@ namespace Community.Controllers
                  foreach (string _formData in collection)
                  {
                      string id = collection[_formData];
+                     Debug.WriteLine("Inbox controller MarkAsRead vill göra en int av detta: "+id);
                      int idnumber = Convert.ToInt32(id);
                      ReadEntry entry = db.ReadEntries.Where(r => r.Message.Id == idnumber && r.Receiver.Equals(currentuser)).Single();
                      if (!entry.hasRead())
@@ -77,10 +87,11 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            string currentuser = User.Identity.GetUserId();
             Message message = db.Messages.Find(id);
             MessageViewModel messageCopy = new MessageViewModel(message);
             //set read entry to viewed
-            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id).Single();
+            ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id && r.Receiver.Equals(currentuser)).Single();
             if (!entry.hasRead()){
                 entry.FirstReadTime = System.DateTime.Now;
                 db.SaveChanges();
@@ -117,8 +128,10 @@ namespace Community.Controllers
         {
             string receiver = User.Identity.GetUserId();
             Message message = db.Messages.Find(id);
-            ReadEntry readentry = db.ReadEntries.Where(r => r.Message.Id == message.Id&&r.Receiver.Equals(receiver)).Single();
-            readentry.Active = false;
+            List<ReadEntry> entries = db.ReadEntries.Where(r => r.Message.Id == message.Id&&r.Receiver.Equals(receiver)).ToList();
+            foreach(var readentry in entries){
+                readentry.Active=false;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

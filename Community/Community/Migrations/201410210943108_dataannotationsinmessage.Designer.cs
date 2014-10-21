@@ -7,13 +7,13 @@ namespace Community.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class dataannotationsinmessage : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dataannotationsinmessage));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410161403362_InitialCreate"; }
+            get { return "201410210943108_dataannotationsinmessage"; }
         }
         
         string IMigrationMetadata.Source

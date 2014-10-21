@@ -8,8 +8,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using Community.Models;
 
-namespace Community.Models
+namespace Community.ViewModels
 {
     public class MessageViewModel
     {
@@ -25,11 +26,15 @@ namespace Community.Models
         
         public List<String> recvList { get; set; }
 
+        [Required]
+        [MaxLength(100)]
         public string Title { get; set; }
 
          public string Receiver { get; set; }
 
-            [Display(Name = "Message")]
+         [Display(Name = "Message")]
+         [Required]
+         [MaxLength(5000)]
         public string TheMessage { get; set; }
 
 

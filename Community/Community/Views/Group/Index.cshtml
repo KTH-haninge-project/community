@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Community.Models.GroupViewModel>
+﻿@model IEnumerable<Community.ViewModels.GroupViewModel>
 
 @{
     ViewBag.Title = "Groups";
@@ -17,38 +17,56 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>@Html.DisplayName("Status")</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @{
-    if (item.isMember)
-    {
-        @Html.Raw("<font color=\"#00AA00\">")
-    }
     @Html.DisplayFor(modelItem => item.Name)
-    if (item.isMember)
-    {
-        @Html.Raw("</font>")
-    }
-}
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @{
+    if (item.isOwner)
+    {
+        @Html.Raw("Owner")
+    }
+    else if (item.isMember)
+    {
+        @Html.Raw("Member")
+    }
+    else
+    {
+        @Html.Raw("Not a member")
+    }
+}
+        </td>
+        <td>
             @Html.ActionLink("Details", "Details", new { id = item.Id })
             @{
-    if (item.isMember)
+    if (item.isOwner)
     {
         @Html.Raw(" | ")
         @Html.ActionLink("Edit", "Edit", new { id=item.Id })
     @Html.Raw(" | ")
         @Html.ActionLink("Delete", "Delete", new { id=item.Id })
     }
+    if (!item.isMember)
+    {
+       @Html.Raw(" | ")
+       @Html.ActionLink("Join Group", "JoinGroup", new { id = item.Id })
+    }
+    else
+    {
+        @Html.Raw(" | ")
+        @Html.ActionLink("Leave Group", "LeaveGroup", new { id = item.Id })
+    }
 }
+
         </td>
     </tr>
 }

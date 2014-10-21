@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Community.Models
+namespace Community.ViewModels
 {
     public class InboxViewModel
     {

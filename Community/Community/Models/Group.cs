@@ -14,7 +14,7 @@ namespace Community.Models
         public string Description { get; set; }
 
         // Navigation property
-        public virtual List<ApplicationUser> Members { get; set; }
+        public virtual ICollection<ApplicationUser> Members { get; set; }
 
         public virtual ApplicationUser God { get; set; }
 
@@ -34,4 +34,5 @@ namespace Community.Models
             Members.Remove(user);
         }
     }
+
 }

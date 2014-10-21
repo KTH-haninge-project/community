@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
+using Community.ViewModels;
 
 namespace Community.Controllers
 {
@@ -24,10 +26,11 @@ namespace Community.Controllers
             foreach (Group group in groups)
             {
                 GroupViewModel viewmodel = new GroupViewModel(group);
-                if(group.Members.Contains(user)){
-                    viewmodel.isMember=true;
+                if (group.God.Equals(user))
+                {
+                    viewmodel.isOwner = true;
                 }
-                else if(group.God.Equals(user)){
+                if(group.Members.Contains(user)){
                     viewmodel.isMember=true;
                 }
                 else{
@@ -54,12 +57,13 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
-            GroupViewModel viewmodel = new GroupViewModel(group);
-            viewmodel.Members.Add(group.God.Email);
-            viewmodel.Members.Add("Knatte");
-            viewmodel.Members.Add("Fnatte");
-            viewmodel.Members.Add("Tjatte");
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
 
+            GroupViewModel viewmodel = new GroupViewModel(group);
+            if (group.Members.Contains(user) || group.God.Equals(user))
+            {
+                viewmodel.isMember = true;
+            }
             return View(viewmodel);
         }
 
@@ -82,6 +86,7 @@ namespace Community.Controllers
                 group.Id = groupViewModel.Id;
                 group.Name = groupViewModel.Name;
                 group.God = db.Users.Find(User.Identity.GetUserId());
+                group.AddMember(group.God);
                 group.Description = groupViewModel.Description;
                 db.Groups.Add(group);
                 db.SaveChanges();
@@ -103,6 +108,14 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             return View(new GroupViewModel(group));
         }
 
@@ -116,6 +129,12 @@ namespace Community.Controllers
             if (ModelState.IsValid)
             {
                 Group group = db.Groups.Find(groupViewModel.Id);
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                if (!group.God.Equals(user))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
                 group.Name = groupViewModel.Name;
                 group.Description = groupViewModel.Description;
                 db.SaveChanges();
@@ -136,17 +155,72 @@ namespace Community.Controllers
             {
                 return HttpNotFound();
             }
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(new GroupViewModel(group));
         }
-
         // POST: Group/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Group group = db.Groups.Find(id);
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            if (!group.God.Equals(user))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             db.Groups.Remove(group);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult JoinGroup(GroupViewModel groupViewModel)
+        {
+            if (groupViewModel== null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = db.Groups.Find(groupViewModel.Id);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+            Debug.WriteLine("Number of members in group before add: " + group.Members.Count);
+
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+            if (!group.Members.Contains(user))
+            {
+                group.AddMember(user);
+                Debug.WriteLine("Number of members in group after add: " + group.Members.Count);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult LeaveGroup(GroupViewModel groupViewModel)
+        {
+            if (groupViewModel == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = db.Groups.Find(groupViewModel.Id);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+            if (group.Members.Contains(user))
+            {
+                group.RemoveMember(user);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
