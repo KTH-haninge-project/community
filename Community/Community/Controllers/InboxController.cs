@@ -15,7 +15,7 @@ using Community.ViewModels;
 namespace Community.Controllers
 {
     [Authorize]
-    public class InboxController : Controller
+    public class InboxController : DefaultController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
