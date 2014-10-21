@@ -15,6 +15,7 @@ namespace Community.Controllers
 {
     public class GroupController : DefaultController
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Group
