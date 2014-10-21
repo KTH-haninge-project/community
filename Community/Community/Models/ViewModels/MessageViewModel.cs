@@ -27,14 +27,14 @@ namespace Community.ViewModels
         public List<String> recvList { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(100, ErrorMessage = "Title cannot be longer than 100 characters")]
         public string Title { get; set; }
 
          public string Receiver { get; set; }
 
          [Display(Name = "Message")]
          [Required]
-         [MaxLength(5000)]
+         [MaxLength(5000, ErrorMessage = "Message cannot be longer than 5000 characters")]
         public string TheMessage { get; set; }
 
 

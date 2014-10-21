@@ -10,7 +10,14 @@ namespace Community.ViewModels
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
 
+        [Required]
+        [MinLength(3, ErrorMessage = "Group name must be at least 3 characters long")]
+        [MaxLength(100, ErrorMessage="Group name cannot be longer than 100 characters")]
+        [RegularExpression(@"^[a-zåäöA-ZÅÄÖ0-9''-'\s]{1,40}$", ErrorMessage =
+            "Only swedish letters, numbers, and blank spaces are allowed in group name")]
         public string Name{ get; set; }
+
+        [MaxLength(5000)]
         public string Description { get; set; }
 
         public List<String> Members { get; set; }

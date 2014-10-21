@@ -26,7 +26,7 @@ namespace Community.Controllers
             foreach (Group group in groups)
             {
                 GroupViewModel viewmodel = new GroupViewModel(group);
-                if (group.God.Equals(user))
+                if (group.Owner.Equals(user))
                 {
                     viewmodel.isOwner = true;
                 }
@@ -60,7 +60,7 @@ namespace Community.Controllers
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
 
             GroupViewModel viewmodel = new GroupViewModel(group);
-            if (group.Members.Contains(user) || group.God.Equals(user))
+            if (group.Members.Contains(user) || group.Owner.Equals(user))
             {
                 viewmodel.isMember = true;
             }
@@ -85,8 +85,8 @@ namespace Community.Controllers
                 Group group = new Group();
                 group.Id = groupViewModel.Id;
                 group.Name = groupViewModel.Name;
-                group.God = db.Users.Find(User.Identity.GetUserId());
-                group.AddMember(group.God);
+                group.Owner = db.Users.Find(User.Identity.GetUserId());
+                group.AddMember(group.Owner);
                 group.Description = groupViewModel.Description;
                 db.Groups.Add(group);
                 db.SaveChanges();
@@ -111,7 +111,7 @@ namespace Community.Controllers
 
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
 
-            if (!group.God.Equals(user))
+            if (!group.Owner.Equals(user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -130,7 +130,7 @@ namespace Community.Controllers
             {
                 Group group = db.Groups.Find(groupViewModel.Id);
                 ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-                if (!group.God.Equals(user))
+                if (!group.Owner.Equals(user))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
@@ -156,7 +156,7 @@ namespace Community.Controllers
                 return HttpNotFound();
             }
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-            if (!group.God.Equals(user))
+            if (!group.Owner.Equals(user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -169,7 +169,7 @@ namespace Community.Controllers
         {
             Group group = db.Groups.Find(id);
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-            if (!group.God.Equals(user))
+            if (!group.Owner.Equals(user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
