@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
+using Community.ViewModels;
 
 
 namespace Community.Controllers

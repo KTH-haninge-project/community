@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Community.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Community.Models
+namespace Community.ViewModels
 {
     public class GroupViewModel
     {

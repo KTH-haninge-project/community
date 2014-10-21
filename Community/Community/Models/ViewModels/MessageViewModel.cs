@@ -8,8 +8,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using Community.Models;
 
-namespace Community.Models
+namespace Community.ViewModels
 {
     public class MessageViewModel
     {
