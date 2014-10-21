@@ -32,6 +32,10 @@ namespace Community.Controllers
                 {
                     viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
                 }
+                if (viewmodel.Title.Length > 15)
+                {
+                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
+                }
                 messagemodels.Add(viewmodel);
             }
             messagemodels.Reverse();

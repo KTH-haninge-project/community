@@ -35,6 +35,14 @@ namespace Community.Controllers
                 }else{
                     viewmodel.Read = "[NEW]";
                 }
+                if (viewmodel.TheMessage.Length > 15)
+                {
+                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                if (viewmodel.Title.Length > 15)
+                {
+                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
+                }
                 messages.Add(viewmodel);
 
             }
@@ -118,8 +126,10 @@ namespace Community.Controllers
         {
             string receiver = User.Identity.GetUserId();
             Message message = db.Messages.Find(id);
-            ReadEntry readentry = db.ReadEntries.Where(r => r.Message.Id == message.Id&&r.Receiver.Equals(receiver)).Single();
-            readentry.Active = false;
+            List<ReadEntry> entries = db.ReadEntries.Where(r => r.Message.Id == message.Id&&r.Receiver.Equals(receiver)).ToList();
+            foreach(var readentry in entries){
+                readentry.Active=false;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
