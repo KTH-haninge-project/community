@@ -65,6 +65,7 @@ namespace Community.Controllers
                  foreach (string _formData in collection)
                  {
                      string id = collection[_formData];
+                     Debug.WriteLine("Inbox controller MarkAsRead vill göra en int av detta: "+id);
                      int idnumber = Convert.ToInt32(id);
                      ReadEntry entry = db.ReadEntries.Where(r => r.Message.Id == idnumber && r.Receiver.Equals(currentuser)).Single();
                      if (!entry.hasRead())
