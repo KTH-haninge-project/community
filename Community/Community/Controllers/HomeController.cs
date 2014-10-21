@@ -13,7 +13,23 @@ namespace Community.Controllers
     {
         public ActionResult Index()
         { //ViewBag.unread="";
-            
+            ViewBag.unread = "not logedins";
+            //try{
+            if (User.Identity.IsAuthenticated)
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                String id = User.Identity.GetUserId();
+                int unread = 0;
+                List<ReadEntry> unreadlist = db.ReadEntries.Where(r => r.Receiver.Equals(id)).ToList();
+                foreach(ReadEntry read in unreadlist){
+                    if(!read.hasRead()){
+                        unread++;
+                    }
+                }
+                ViewBag.unread = "[" + unread + "]";
+                String outputer = ViewBag.unread + "";
+                Debug.WriteLine("tot messages: " + outputer);
+            }
             return View();
         }
 
