@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Community.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,11 +20,13 @@ namespace Community.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
             HomeViewModel home = new HomeViewModel();
-            home.email = "din@hårdkodade.mejl";
-            home.lastLogin = DateTime.Today;
-            home.loginsLastMonth = 1339;
-            home.unreadMessages = 1337;
+            home.email = user.Email;
+            home.lastLogin = user.lastLogin;
+            home.loginsLastMonth = user.loginMonthCounter;
+            home.unreadMessages = db.ReadEntries.Where(r => r.Receiver.Equals(user.Id)&&r.Active&&r.FirstReadTime==null).Count();
             return View(home);
         }
 
