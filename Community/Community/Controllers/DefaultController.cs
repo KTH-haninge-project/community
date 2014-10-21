@@ -14,14 +14,17 @@ using System.Diagnostics;
 
 namespace Community.Controllers
 {
+    [Authorize]
     public class DefaultController:Controller
     {
-        public DefaultController():base()
+        public DefaultController()
+            : base()
         {
+            /*
             ApplicationDbContext db = new ApplicationDbContext();
             ViewBag.unread = "not logedins";
-            try{
-                if( User.Identity.IsAuthenticated){
+            //try{
+             //   if( User.Identity.IsAuthenticated){
                     String id = User.Identity.GetUserId();
                     List<ReadEntry> unreadlist = db.ReadEntries.Where(r => r.Receiver.Equals(id)).ToList();
 
@@ -29,9 +32,10 @@ namespace Community.Controllers
                     String outputer = ViewBag.unread + "";
                     Debug.WriteLine("tot messages: " + outputer);
                 }
-            }catch (NullReferenceException e){
-              String t= e.Message;
-           }
+           // }catch (NullReferenceException e){
+           //    String t= e.Message;
+           // }
+        */
         }
     }
 }

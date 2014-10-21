@@ -167,13 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410211136595_InitialCreate.cs" />
-    <Compile Include="Migrations\201410211136595_InitialCreate.Designer.cs">
-      <DependentUpon>201410211136595_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410211146414_stuffz.cs" />
-    <Compile Include="Migrations\201410211146414_stuffz.Designer.cs">
-      <DependentUpon>201410211146414_stuffz.cs</DependentUpon>
+    <Compile Include="Migrations\201410211208443_test3.cs" />
+    <Compile Include="Migrations\201410211208443_test3.Designer.cs">
+      <DependentUpon>201410211208443_test3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Group.cs" />
@@ -271,11 +267,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201410211136595_InitialCreate.resx">
-      <DependentUpon>201410211136595_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410211146414_stuffz.resx">
-      <DependentUpon>201410211146414_stuffz.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410211208443_test3.resx">
+      <DependentUpon>201410211208443_test3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
