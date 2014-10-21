@@ -10,13 +10,22 @@ namespace Community.Models
     {
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
+
+
+
+        [Required]
+        [MinLength(3)]
+        [MaxLength(100)]
+        [RegularExpression(@"^[a-zåäöA-ZÅÄÖ0-9''-'\s]{1,40}$")]
         public string Name { get; set; }
+
+        [MaxLength(5000)]
         public string Description { get; set; }
 
         // Navigation property
         public virtual ICollection<ApplicationUser> Members { get; set; }
 
-        public virtual ApplicationUser God { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         public Group()
         {
