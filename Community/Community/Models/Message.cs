@@ -8,9 +8,12 @@ namespace Community.Models
     {
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
-
+        [Required]
+        [MaxLength(5000)]
         public string TheMessage { get; set; }
 
+         [Required]
+         [MaxLength(100)]
         public string Title { get; set; }
 
         public System.DateTime sendTimeStamp { get; set; }

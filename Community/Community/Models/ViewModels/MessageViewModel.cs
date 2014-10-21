@@ -26,11 +26,15 @@ namespace Community.ViewModels
         
         public List<String> recvList { get; set; }
 
+        [Required]
+        [MaxLength(100)]
         public string Title { get; set; }
 
          public string Receiver { get; set; }
 
-            [Display(Name = "Message")]
+         [Display(Name = "Message")]
+         [Required]
+         [MaxLength(5000)]
         public string TheMessage { get; set; }
 
 
