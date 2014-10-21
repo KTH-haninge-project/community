@@ -15,17 +15,17 @@ using Community.Models;
 namespace Community.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DefaultController
     {
         private ApplicationUserManager _userManager;
+        
+        public AccountController():base(){
+                    }
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager):base()
         {
             UserManager = userManager;
+            
         }
 
         public ApplicationUserManager UserManager {
@@ -39,12 +39,15 @@ namespace Community.Controllers
             }
         }
 
+       
         //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             ViewBag.ReturnUrl = returnUrl;
+           
             return View();
         }
 

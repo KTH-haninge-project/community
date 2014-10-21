@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
-    public class GroupController : Controller
+    public class GroupController : DefaultController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

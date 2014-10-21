@@ -17,6 +17,8 @@ namespace Community.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+       
+
         // GET: MessageViewModels
         public ActionResult Index()
         {
