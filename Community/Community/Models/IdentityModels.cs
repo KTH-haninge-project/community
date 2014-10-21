@@ -11,8 +11,8 @@ namespace Community.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public DateTime lastLogin { get; set; }
-        public int loginMonthCounter { get; set; }
+       public DateTime lastLogin { get; set; }
+       public int loginMonthCounter { get; set; }
 
         public virtual ICollection<Group> GroupMemberships { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -27,7 +27,8 @@ namespace Community.Models
      //   public virtual ICollection<Message> SentMessages { get; set; }
         public ApplicationUser()
         {
-     //       SentMessages = new List<Message>();
+            loginMonthCounter = 0;
+            lastLogin = DateTime.Today;
         }
     }
 

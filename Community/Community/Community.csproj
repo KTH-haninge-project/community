@@ -167,61 +167,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410161403362_InitialCreate.cs" />
-    <Compile Include="Migrations\201410161403362_InitialCreate.Designer.cs">
-      <DependentUpon>201410161403362_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201410211136595_InitialCreate.cs" />
+    <Compile Include="Migrations\201410211136595_InitialCreate.Designer.cs">
+      <DependentUpon>201410211136595_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410171219202_test1.cs" />
-    <Compile Include="Migrations\201410171219202_test1.Designer.cs">
-      <DependentUpon>201410171219202_test1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410171220165_testadd.cs" />
-    <Compile Include="Migrations\201410171220165_testadd.Designer.cs">
-      <DependentUpon>201410171220165_testadd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410200938066_test.cs" />
-    <Compile Include="Migrations\201410200938066_test.Designer.cs">
-      <DependentUpon>201410200938066_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410201000574_sdfd.cs" />
-    <Compile Include="Migrations\201410201000574_sdfd.Designer.cs">
-      <DependentUpon>201410201000574_sdfd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410201010185_gfdf.cs" />
-    <Compile Include="Migrations\201410201010185_gfdf.Designer.cs">
-      <DependentUpon>201410201010185_gfdf.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410201033480_dfg.cs" />
-    <Compile Include="Migrations\201410201033480_dfg.Designer.cs">
-      <DependentUpon>201410201033480_dfg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410201147585_addedgroups.cs" />
-    <Compile Include="Migrations\201410201147585_addedgroups.Designer.cs">
-      <DependentUpon>201410201147585_addedgroups.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410201202582_added_addressSpace.cs" />
-    <Compile Include="Migrations\201410201202582_added_addressSpace.Designer.cs">
-      <DependentUpon>201410201202582_added_addressSpace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410211049396_timestampinuser.cs" />
-    <Compile Include="Migrations\201410211049396_timestampinuser.Designer.cs">
-      <DependentUpon>201410211049396_timestampinuser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410211109491_groupdataannotations.cs" />
-    <Compile Include="Migrations\201410211109491_groupdataannotations.Designer.cs">
-      <DependentUpon>201410211109491_groupdataannotations.cs</DependentUpon>
+    <Compile Include="Migrations\201410211146414_stuffz.cs" />
+    <Compile Include="Migrations\201410211146414_stuffz.Designer.cs">
+      <DependentUpon>201410211146414_stuffz.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\InboxViewModel.cs" />
     <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\ReadEntry.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\ViewBaseModel.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\GroupViewModel.cs" />
+    <Compile Include="Models\ViewModels\InboxViewModel.cs" />
+    <Compile Include="Models\ViewModels\MessageViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -309,38 +273,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201410161403362_InitialCreate.resx">
-      <DependentUpon>201410161403362_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410211136595_InitialCreate.resx">
+      <DependentUpon>201410211136595_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410171219202_test1.resx">
-      <DependentUpon>201410171219202_test1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410171220165_testadd.resx">
-      <DependentUpon>201410171220165_testadd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410200938066_test.resx">
-      <DependentUpon>201410200938066_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410201000574_sdfd.resx">
-      <DependentUpon>201410201000574_sdfd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410201010185_gfdf.resx">
-      <DependentUpon>201410201010185_gfdf.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410201033480_dfg.resx">
-      <DependentUpon>201410201033480_dfg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410201147585_addedgroups.resx">
-      <DependentUpon>201410201147585_addedgroups.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410201202582_added_addressSpace.resx">
-      <DependentUpon>201410201202582_added_addressSpace.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410211049396_timestampinuser.resx">
-      <DependentUpon>201410211049396_timestampinuser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410211109491_groupdataannotations.resx">
-      <DependentUpon>201410211109491_groupdataannotations.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410211146414_stuffz.resx">
+      <DependentUpon>201410211146414_stuffz.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

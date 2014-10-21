@@ -3,7 +3,7 @@ namespace Community.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -12,19 +12,21 @@ namespace Community.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false, maxLength: 100),
                         Description = c.String(),
-                        God_Id = c.String(maxLength: 128),
+                        Owner_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.God_Id)
-                .Index(t => t.God_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.Owner_Id)
+                .Index(t => t.Owner_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        lastLogin = c.DateTime(nullable: false),
+                        loginMonthCounter = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -83,8 +85,8 @@ namespace Community.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TheMessage = c.String(),
-                        Title = c.String(),
+                        TheMessage = c.String(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 100),
                         sendTimeStamp = c.DateTime(nullable: false),
                         Sender = c.String(),
                     })
@@ -133,7 +135,7 @@ namespace Community.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.ReadEntries", "Message_Id", "dbo.Messages");
-            DropForeignKey("dbo.Groups", "God_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Groups", "Owner_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.T_GROUP_USER", "Group_id", "dbo.Groups");
@@ -148,7 +150,7 @@ namespace Community.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Groups", new[] { "God_Id" });
+            DropIndex("dbo.Groups", new[] { "Owner_Id" });
             DropTable("dbo.T_GROUP_USER");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ReadEntries");
