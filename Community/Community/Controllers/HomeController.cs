@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Community.Models;
-using System.Diagnostics;
-using Microsoft.AspNet.Identity;
+using Community.Models.ViewModels;
 
 namespace Community.Controllers
 {
-    public class HomeController : DefaultController
+    public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: Home
         public ActionResult Index()
-        { //ViewBag.unread="";
-            
-            return View();
+        {
+            HomeViewModel home = new HomeViewModel();
+            home.email = "din@hårdkodade.mejl";
+            home.lastLogin = DateTime.Today;
+            home.loginsLastMonth = 1339;
+            home.unreadMessages = 1337;
+            return View(home);
         }
 
-        public ActionResult About()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

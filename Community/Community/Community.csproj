@@ -180,9 +180,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\ReadEntry.cs" />
-    <Compile Include="Models\ViewBaseModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\InboxViewModel.cs" />
     <Compile Include="Models\ViewModels\MessageViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
@@ -229,9 +229,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -261,6 +258,7 @@
     <Content Include="Views\Group\Details.cshtml" />
     <Content Include="Views\Group\Edit.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

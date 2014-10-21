@@ -1,35 +1,49 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Community.Models.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>Swag Town</h1>
-    <p class="lead">Swag Town is a web based community service with chat/mail functionality</p>
-    <!--<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>-->
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            To start chatting with your friends, register an account 
-            <!--<a class="btn btn-default" href="/Message/index">Learn less &raquo;</a>-->
-        </p>
-        <!--<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>-->
-    </div>
-    <div class="col-md-4">
-        <h2>Functions</h2>
-        <p>What you can do with this awesome chat application, you can: </p>
-        <p><ul>
-            <li>Send messages to several users and/or groups of users.
-            </li><li>Read messages and see when you read your messages.
-            </li><li>Join groups to receive mass spam.
-            </li></ul></p>
-       <!-- <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    --></div>
+<div>
+    <h4>MessageViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastLogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastLogin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.loginsLastMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loginsLastMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unreadMessages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unreadMessages)
+        </dd>
+
+    </dl>
 </div>
