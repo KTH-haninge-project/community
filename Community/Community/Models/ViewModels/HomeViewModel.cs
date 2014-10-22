@@ -10,7 +10,7 @@ namespace Community.Models.ViewModels
     {
     [Key]
         public string email { get; set; }
-        public DateTime lastLogin { get; set; }
+        public DateTime? lastLogin { get; set; }
 
         public int loginsLastMonth { get; set; }
 

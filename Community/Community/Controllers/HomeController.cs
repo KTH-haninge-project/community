@@ -23,9 +23,10 @@ namespace Community.Controllers
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
 
             HomeViewModel home = new HomeViewModel();
+            UserStatistics stats = db.UserStatistics.Where(s => s.userid.Equals(user.Id)).Single();
             home.email = user.Email;
-            home.lastLogin = user.lastLogin;
-            home.loginsLastMonth = user.loginMonthCounter;
+            home.lastLogin = stats.LastLogin;
+            home.loginsLastMonth = stats.numberOfLoginsThisMonth;
             home.unreadMessages = db.ReadEntries.Where(r => r.Receiver.Equals(user.Id)&&r.Active&&r.FirstReadTime==null).Count();
             return View(home);
         }

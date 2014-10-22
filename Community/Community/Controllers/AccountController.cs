@@ -12,12 +12,14 @@ using Microsoft.Owin.Security;
 using Owin;
 using Community.Models;
 using Community.ViewModels;
+using System.Diagnostics;
 
 namespace Community.Controllers
 {
     [Authorize]
     public class AccountController : DefaultController
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         
         public AccountController():base(){
@@ -59,12 +61,25 @@ namespace Community.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+                    UserStatistics stats = db.UserStatistics.Where(s => s.userid.Equals(user.Id)).Single();
+                    stats.LastLogin = stats.CurrentLogin;
+                    stats.CurrentLogin = DateTime.Now;
+                    if (stats.LastLogin.Value.Month != stats.CurrentLogin.Value.Month)
+                    {
+                        stats.numberOfLoginsThisMonth = 1;
+                    }
+                    else
+                    {
+                        stats.numberOfLoginsThisMonth++;
+                    }
+                    db.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -98,6 +113,12 @@ namespace Community.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserStatistics userstats = new UserStatistics(user.Id);
+                    userstats.LastLogin = DateTime.Now;
+                    userstats.CurrentLogin = DateTime.Now;
+                    db.UserStatistics.Add(userstats);
+                    db.SaveChanges();
+                    db.Dispose();
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -105,6 +126,7 @@ namespace Community.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
 
                     return RedirectToAction("Index", "Home");
                 }
