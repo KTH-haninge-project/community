@@ -14,46 +14,19 @@ using Community.ViewModels;
 
 namespace Community.Controllers
 {
+    /// <summary>
+    /// Controller for inbox pages
+    /// </summary>
     [Authorize]
     public class InboxController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-      // GET: Inbox
-  /*      public ActionResult Index()
-        {
-            string currentuser = User.Identity.GetUserId();
-            List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)&&r.Active).ToList<ReadEntry>();
-            int countDeleted = db.ReadEntries.Count(r => r.Receiver.Equals(currentuser) && !(r.Active));
-            List<MessageViewModel> messages = new List<MessageViewModel>();
-
-            foreach (ReadEntry entry in readEntries)
-            {
-                MessageViewModel viewmodel = new MessageViewModel(entry.Message);
-                if (entry.hasRead())
-                {
-                    viewmodel.Read = entry.FirstReadTime.ToString();
-                }else{
-                    viewmodel.Read = "[NEW]";
-                }
-                if (viewmodel.TheMessage.Length > 15)
-                {
-                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
-                }
-                if (viewmodel.Title.Length > 15)
-                {
-                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
-                }
-                messages.Add(viewmodel);
-
-            }
-
-            messages.Reverse();
-            InboxViewModel inboxview= new InboxViewModel(messages, countDeleted);
-            return View(inboxview);
-        }*/
-
-        // GET: Inbox
+       /// <summary>
+       /// Shows list of messages from a specific sender
+       /// </summary>
+       /// <param name="sendermail">E-mail address of sender</param>
+       /// <returns>Messages from sender to user</returns>
         public ActionResult Index(String sendermail)
         {
             if (sendermail == null)
@@ -96,7 +69,11 @@ namespace Community.Controllers
         }
 
 
-
+        /// <summary>
+        /// Marks messages as read
+        /// </summary>
+        /// <param name="collection">Collection of messages</param>
+        /// <returns></returns>
         [HttpPost, ActionName("MarkAsRead")]
         public ActionResult Index(FormCollection collection)
         {
@@ -124,7 +101,11 @@ namespace Community.Controllers
             return RedirectToAction("Index", "Inbox");
         }
 
-        // GET: Inbox/Details/5
+        /// <summary>
+        /// Shows detailed page of a specific message
+        /// </summary>
+        /// <param name="id">Message id</param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -150,7 +131,11 @@ namespace Community.Controllers
             return View(messageCopy);
         }
 
-        // GET: Inbox/Delete/5
+        /// <summary>
+        /// Shows message deletion page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -165,7 +150,11 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // POST: Inbox/Delete/5
+        /// <summary>
+        /// Removes a message from receivers inbox by marking the ReadEntry as inactive
+        /// </summary>
+        /// <param name="id">ID of the message</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

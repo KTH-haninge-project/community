@@ -9,11 +9,17 @@ using System.Diagnostics;
 
 namespace Community.Controllers
 {
+    /// <summary>
+    /// Controller for Senders page
+    /// </summary>
     public class SendersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Senders
+        /// <summary>
+        /// Displays senders of active messages to the user
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();

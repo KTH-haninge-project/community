@@ -13,6 +13,9 @@ using Community.ViewModels;
 
 namespace Community.Controllers
 {
+    /// <summary>
+    /// Controllers for sending and viewing sent messages
+    /// </summary>
     [Authorize]
     public class MessageController : Controller
     {
@@ -20,7 +23,10 @@ namespace Community.Controllers
 
        
 
-        // GET: MessageViewModels
+        /// <summary>
+        /// Shows all sent messages by current user
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
@@ -45,7 +51,11 @@ namespace Community.Controllers
             return View(messagemodels);
         }
 
-        // GET: MessageViewModels/Details/5
+        /// <summary>
+        /// Shows detailed page about message sent from user
+        /// </summary>
+        /// <param name="id">Message id</param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
 
@@ -62,7 +72,10 @@ namespace Community.Controllers
             return View(new MessageViewModel(message));
         }
 
-        // GET: MessageViewModels/Create
+       /// <summary>
+       /// Shows Message creation page
+       /// </summary>
+       /// <returns></returns>
         public ActionResult Create()
         {
 
@@ -82,9 +95,11 @@ namespace Community.Controllers
             return View(mvm);
         }
 
-        // POST: MessageViewModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       /// <summary>
+       /// Creates message
+       /// </summary>
+       /// <param name="messageViewModel">Message data</param>
+       /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,TheMessage,Title,recvList")] MessageViewModel messageViewModel)
@@ -129,8 +144,11 @@ namespace Community.Controllers
 
             return View(messageViewModel);
         }
-
-        // GET: MessageViewModels/Edit/5
+      /// <summary>
+      /// Shows message edit page
+      /// </summary>
+      /// <param name="id">Message id</param>
+      /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -151,9 +169,11 @@ namespace Community.Controllers
             return View(new MessageViewModel(message));
         }
 
-        // POST: MessageViewModels/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits message sent by current user
+        /// </summary>
+        /// <param name="messageViewModel">Message data</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,TheMessage,Title,Receiver")] MessageViewModel messageViewModel)
@@ -176,7 +196,11 @@ namespace Community.Controllers
             return View(messageViewModel);
         }
 
-        // GET: MessageViewModels/Delete/5
+       /// <summary>
+       /// Shows message deletion page
+       /// </summary>
+       /// <param name="id">Message id</param>
+       /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -196,7 +220,11 @@ namespace Community.Controllers
             return View(new MessageViewModel(message));
         }
 
-        // POST: MessageViewModels/Delete/5
+        /// <summary>
+        /// Deletes message sent by current user
+        /// </summary>
+        /// <param name="id">Message id</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -229,7 +257,12 @@ namespace Community.Controllers
             base.Dispose(disposing);
         }
 
-        public bool IsValidEmail(string email)
+        /// <summary>
+        /// Checks whether a string is an valid email or not
+        /// </summary>
+        /// <param name="email">Email candidate string</param>
+        /// <returns></returns>
+        private bool IsValidEmail(string email)
         {
             try
             {

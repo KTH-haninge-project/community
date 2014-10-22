@@ -12,12 +12,18 @@ using Microsoft.AspNet.Identity;
 
 namespace Community.Controllers
 {
+    /// <summary>
+    /// Home pages controller
+    /// </summary>
     [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Home
+        /// <summary>
+        /// Shows index page with user statistics
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());

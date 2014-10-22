@@ -13,12 +13,18 @@ using Community.ViewModels;
 
 namespace Community.Controllers
 {
+    /// <summary>
+    /// Controlls actions regarding groups
+    /// </summary>
     public class GroupController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Group
+        /// <summary>
+        /// Show list of all groups
+        /// </summary>
+        /// <returns>List of all groups</returns>
         public ActionResult Index()
         {
             List<Group> groups = db.Groups.ToList();
@@ -46,7 +52,11 @@ namespace Community.Controllers
             return View(viewmodels);
         }
 
-        // GET: Group/Details/5
+        /// <summary>
+        /// Shows specific group
+        /// </summary>
+        /// <param name="id">ID of grup</param>
+        /// <returns>Group data</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -68,15 +78,20 @@ namespace Community.Controllers
             return View(viewmodel);
         }
 
-        // GET: Group/Create
+        /// <summary>
+        /// Shows page to create group
+        /// </summary>
+        /// <returns>Create group page view</returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Group/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       /// <summary>
+       /// Creates group
+       /// </summary>
+       /// <param name="groupViewModel">Viewmodel of Group</param>
+       /// <returns>Index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] GroupViewModel groupViewModel)
@@ -97,7 +112,11 @@ namespace Community.Controllers
             return View(groupViewModel);
         }
 
-        // GET: Group/Edit/5
+        /// <summary>
+        /// Shows group edit page if user is owner of the group
+        /// </summary>
+        /// <param name="id">Group ID</param>
+        /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -120,9 +139,11 @@ namespace Community.Controllers
             return View(new GroupViewModel(group));
         }
 
-        // POST: Group/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits group if user is owner of the group
+        /// </summary>
+        /// <param name="id">Group ID</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] GroupViewModel groupViewModel)
@@ -144,7 +165,11 @@ namespace Community.Controllers
             return View(groupViewModel);
         }
 
-        // GET: Group/Delete/5
+        /// <summary>
+        /// Shows group delete page if user is owner of the group
+        /// </summary>
+        /// <param name="id">Group ID</param>
+        /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -163,7 +188,12 @@ namespace Community.Controllers
             }
             return View(new GroupViewModel(group));
         }
-        // POST: Group/Delete/5
+
+        /// <summary>
+        /// Deletes group if user is owner of the group
+        /// </summary>
+        /// <param name="id">Group ID</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -179,6 +209,11 @@ namespace Community.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Makes user join group if not already a member
+        /// </summary>
+        /// <param name="groupViewModel"></param>
+        /// <returns></returns>
         public ActionResult JoinGroup(GroupViewModel groupViewModel)
         {
             if (groupViewModel== null)
@@ -203,6 +238,11 @@ namespace Community.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Makes user leave group if the user is member of the grup
+        /// </summary>
+        /// <param name="groupViewModel"></param>
+        /// <returns></returns>
         public ActionResult LeaveGroup(GroupViewModel groupViewModel)
         {
             if (groupViewModel == null)
