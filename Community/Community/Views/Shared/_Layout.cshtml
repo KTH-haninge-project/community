@@ -21,9 +21,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @{String unread = "Inbox " + ViewBag.unread;}
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink(@unread, "Index", "Inbox")<!--display unread messages here at User.Identity.GetReadNum()--> </li>
+                    <li>@Html.ActionLink("Senders", "Index", "Senders")</li>
                     <li>@Html.ActionLink("Outbox", "Index", "Message")</li>
                     <li>@Html.ActionLink("Groups", "Index", "Group")</li>
                 </ul>

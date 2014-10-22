@@ -17,7 +17,7 @@ using System.Diagnostics;
 namespace Community.Controllers
 {
     [Authorize]
-    public class AccountController : DefaultController
+    public class AccountController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;

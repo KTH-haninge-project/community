@@ -1,0 +1,32 @@
+﻿@model Community.ViewModels.SendersViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Sender")
+        </th>
+    </tr>
+
+@foreach (String item in Model.senders) {
+    <tr>
+        <td>
+            @Html.Raw("<a href=\"/Inbox?sendermail="+item+"\">"+item+"</a>")
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.DisplayName("Received messages: ")
+@Html.Raw(Model.ReceivedMessages + "<br>")
+
+@Html.DisplayName("Deleted messages: ")
+@Html.Raw(Model.DeletedMessages + "<br>")
+
+@Html.DisplayName("Read messages: ")
+@Html.Raw(Model.ReadMessages + "")

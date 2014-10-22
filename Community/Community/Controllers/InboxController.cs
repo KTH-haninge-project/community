@@ -15,12 +15,12 @@ using Community.ViewModels;
 namespace Community.Controllers
 {
     [Authorize]
-    public class InboxController : DefaultController
+    public class InboxController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Inbox
-        public ActionResult Index()
+      // GET: Inbox
+  /*      public ActionResult Index()
         {
             string currentuser = User.Identity.GetUserId();
             List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser)&&r.Active).ToList<ReadEntry>();
@@ -51,7 +51,51 @@ namespace Community.Controllers
             messages.Reverse();
             InboxViewModel inboxview= new InboxViewModel(messages, countDeleted);
             return View(inboxview);
+        }*/
+
+        // GET: Inbox
+        public ActionResult Index(String sendermail)
+        {
+            if (sendermail == null)
+            {
+                RedirectToAction("Index", "Senders");
+            }
+            Debug.WriteLine("REceived sendermail "+sendermail);
+            Debug.WriteLine("Sendermail length: "+sendermail.Length);
+            string senderid = db.Users.Where(u => u.Email.Equals(sendermail)).Single().Id;
+            string currentuser = User.Identity.GetUserId();
+            List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser) && r.Active && r.Message.Sender.Equals(senderid)).ToList<ReadEntry>();
+            int countDeleted = db.ReadEntries.Count(r => r.Receiver.Equals(currentuser) && !(r.Active));
+            List<MessageViewModel> messages = new List<MessageViewModel>();
+
+            foreach (ReadEntry entry in readEntries)
+            {
+                MessageViewModel viewmodel = new MessageViewModel(entry.Message);
+                if (entry.hasRead())
+                {
+                    viewmodel.Read = entry.FirstReadTime.ToString();
+                }
+                else
+                {
+                    viewmodel.Read = "[NEW]";
+                }
+                if (viewmodel.TheMessage.Length > 15)
+                {
+                    viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
+                }
+                if (viewmodel.Title.Length > 15)
+                {
+                    viewmodel.Title = viewmodel.Title.Substring(0, 10) + "...";
+                }
+                messages.Add(viewmodel);
+            }
+
+            messages.Reverse();
+            InboxViewModel inboxview = new InboxViewModel(messages, countDeleted);
+            return View(inboxview);
         }
+
+
 
         [HttpPost, ActionName("MarkAsRead")]
         public ActionResult Index(FormCollection collection)
@@ -133,7 +177,9 @@ namespace Community.Controllers
                 readentry.Active=false;
             }
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            string sendermail = db.Users.Where(u => u.Id.Equals(message.Sender)).Single().Email;
+            return RedirectToAction("Index", "Senders");
         }
         protected override void Dispose(bool disposing)
         {
