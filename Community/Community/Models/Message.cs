@@ -4,24 +4,44 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 namespace Community.Models
 {
+    /// <summary>
+    /// Instances of this class represent a message sent by a user.
+    /// </summary>
     public class Message
     {
+        /// <summary>
+        /// Unique Message ID
+        /// </summary>
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
+
+        /// <summary>
+        /// The actual message
+        /// </summary>
         [Required]
         [MaxLength(5000)]
         public string TheMessage { get; set; }
 
+        /// <summary>
+        /// Message title
+        /// </summary>
          [Required]
          [MaxLength(100)]
         public string Title { get; set; }
 
+         /// <summary>
+         /// Timestamp at the sending moment
+         /// </summary>
         public System.DateTime sendTimeStamp { get; set; }
 
-        // Navigation property
+        /// <summary>
+        /// UserID of the sender
+        /// </summary>
         public string Sender { get; set; }
 
-        // Navigation property
+        /// <summary>
+        /// ReadEntries of the message
+        /// </summary>
         public virtual List<ReadEntry> ReadEntries { get; set; }
 
         public Message(string message, string title, string sender, string[] receivers)

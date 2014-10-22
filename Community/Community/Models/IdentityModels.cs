@@ -8,9 +8,14 @@ using System;
 
 namespace Community.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    /// <summary>
+    /// Identity 2.0 User
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// Groups that the user is a member in
+        /// </summary>
         public virtual ICollection<Group> GroupMemberships { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
