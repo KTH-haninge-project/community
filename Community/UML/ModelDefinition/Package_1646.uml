@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="75ed5278-8ad3-402f-8379-8b63e9e1f865"
+  name="Community"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="95c11206-a414-444c-b6b0-d9f3d8570489"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DCommunity"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="74151f12-53ac-4f48-9666-e6d453374add"
+        LastKnownName="Models"
+        LastKnownLocation="Package1_1646.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="58104165-c9b9-4dc1-aff6-d6c3357a84c9"
+        LastKnownName="ViewModels"
+        LastKnownLocation="Package_1647.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="38231caa-b5eb-4bb0-b37d-a1086fbde73f"
+        LastKnownName="Controllers"
+        LastKnownLocation="Package_1651.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

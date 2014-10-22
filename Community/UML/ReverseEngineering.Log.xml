@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2014-10-22T16:50:58" Importance="High" Text="Reverse Engineering Started." />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Boolean' -  (PrimitiveType)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'e4466855-0e5e-4242-90c8-28f88304ea7e' -  (ClassifierTemplateParameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Integer' -  (PrimitiveType)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'String' -  (PrimitiveType)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Medium" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController' -  (Class)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Create' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Create::groupViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::db' -  (Property)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Delete' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Delete::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::DeleteConfirmed' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::DeleteConfirmed::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Details' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Details::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Dispose' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Dispose::disposing' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Edit' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Edit::groupViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Edit::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::GroupController' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::Index' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::JoinGroup' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::JoinGroup::groupViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::LeaveGroup' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::GroupController::LeaveGroup::groupViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Medium" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController' -  (Class)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController::db' -  (Property)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController::Dispose' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController::Dispose::disposing' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController::HomeController' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::HomeController::Index' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Medium" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController' -  (Class)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::db' -  (Property)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Delete' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Delete::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::DeleteConfirmed' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::DeleteConfirmed::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Details' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Details::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Dispose' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Dispose::disposing' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::InboxController' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Index' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Index::collection' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::InboxController::Index::sendermail' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Medium" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController' -  (Class)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Create' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Create::messageViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::db' -  (Property)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Delete' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Delete::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::DeleteConfirmed' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::DeleteConfirmed::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Details' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Details::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Dispose' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Dispose::disposing' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Edit' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Edit::id' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Edit::messageViewModel' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::Index' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::IsValidEmail' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::IsValidEmail::email' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::MessageController::MessageController' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Medium" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController' -  (Class)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController::db' -  (Property)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController::Dispose' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController::Dispose::disposing' -  (Parameter)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController::Index' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Controllers::SendersController::SendersController' -  (Operation)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Models' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::Models::ApplicationDbContext' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::ViewModels' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::ViewModels::GroupViewModel' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::Community::ViewModels::MessageViewModel' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Nullable' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Nullable&lt;Int32‎&gt;' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Web' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Web::Mvc' -  (Package)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Web::Mvc::ActionResult' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Web::Mvc::Controller' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'UML::System::Web::Mvc::FormCollection' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: UML::Community::Controllers::InboxController to UML::System::Web::Mvc::Controller (Generalization)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: UML::Community::Controllers::MessageController to UML::System::Web::Mvc::Controller (Generalization)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: UML::Community::Controllers::SendersController to UML::System::Web::Mvc::Controller (Generalization)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: UML::Community::Controllers::GroupController to UML::System::Web::Mvc::Controller (Generalization)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: UML::Community::Controllers::HomeController to UML::System::Web::Mvc::Controller (Generalization)" />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="High" Text="(5) type(s) fully reverse engineered." />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="High" Text="(8) type(s) partially reverse engineered.  These types were not included in the original selection so their full definitions are not reverse engineered.  Instead, this shallow operation has simply ensured these types exist in the UML model because they are needed in order to fully describe other elements." />
+  <Message Timestamp="2014-10-22T16:51:06" Importance="High" Text="The reverse engineering operation completed with (0) error(s), and (0) warning(s)." />
+</Log>
