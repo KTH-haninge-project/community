@@ -6,6 +6,9 @@ using System.Web;
 
 namespace Community.Models.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for index page
+    /// </summary>
     public class HomeViewModel
     {
         [Display(Name = "E-mail")]

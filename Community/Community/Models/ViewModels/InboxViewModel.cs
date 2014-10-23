@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Community.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for inbox
+    /// </summary>
     public class InboxViewModel
     {
         public int DeletedCount { get; set; }

@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Community.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for groups
+    /// </summary>
     public class GroupViewModel
     {
         [Key]

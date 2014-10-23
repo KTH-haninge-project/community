@@ -12,6 +12,9 @@ using Community.Models;
 
 namespace Community.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for messages
+    /// </summary>
     public class MessageViewModel
     {
         public int Id { get; set; } // Id for Entity Framework and database

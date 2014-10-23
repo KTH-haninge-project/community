@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Community.ViewModels
 {
+    /// <summary>
+    /// Viewmodel inbox page with list of senders
+    /// </summary>
     public class SendersViewModel
     {
         public List<string> senders { get; set; }
