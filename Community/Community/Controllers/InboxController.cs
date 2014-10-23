@@ -33,8 +33,8 @@ namespace Community.Controllers
             {
                 RedirectToAction("Index", "Senders");
             }
-            Debug.WriteLine("REceived sendermail "+sendermail);
-            Debug.WriteLine("Sendermail length: "+sendermail.Length);
+            //Debug.WriteLine("REceived sendermail "+sendermail);
+            //Debug.WriteLine("Sendermail length: "+sendermail.Length);
             string senderid = db.Users.Where(u => u.Email.Equals(sendermail)).Single().Id;
             string currentuser = User.Identity.GetUserId();
             List<ReadEntry> readEntries = db.ReadEntries.Where(r => r.Receiver.Equals(currentuser) && r.Active && r.Message.Sender.Equals(senderid)).ToList<ReadEntry>();
