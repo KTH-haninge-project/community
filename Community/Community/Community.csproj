@@ -253,6 +253,7 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Senders\Index.cshtml" />
+    <Content Include="Views\Message\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,7 +7,13 @@ namespace Community.ViewModels
     /// </summary>
     public class InboxViewModel
     {
+        /// <summary>
+        /// Number of deleted messages
+        /// </summary>
         public int DeletedCount { get; set; }
+        /// <summary>
+        /// Messages
+        /// </summary>
         public List<MessageViewModel> messages { get; set; }
 
         public InboxViewModel()

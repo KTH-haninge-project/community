@@ -134,9 +134,9 @@ namespace Community.Controllers
             
             if (ModelState.IsValid)
             {
-                db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receiverids.ToArray()));
+                Message message = db.Messages.Add(new Message(messageViewModel.TheMessage, messageViewModel.Title, sender, receiverids.ToArray()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Confirmation", "Message", new { id = message.Id});
             }
 
             return View(messageViewModel);
@@ -272,7 +272,11 @@ namespace Community.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Static method to creat messageviewmodel from message
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>MessageViewModel</returns>
         public static MessageViewModel MessageToViewModel(Message message)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -298,6 +302,32 @@ namespace Community.Controllers
             viewmodel.recvList = new List<string>();
 
             return viewmodel;
+        }
+        /// <summary>
+        /// Displays message sent confirmation page
+        /// </summary>
+        /// <param name="id">Id of message</param>
+        /// <returns></returns>
+        public ActionResult Confirmation(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Message message = db.Messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+
+            string currentuser = User.Identity.GetUserId();
+            if (!message.Sender.Equals(currentuser))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            return View(MessageToViewModel(message));
         }
 
     }

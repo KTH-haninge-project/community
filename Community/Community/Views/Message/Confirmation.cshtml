@@ -1,0 +1,15 @@
+﻿@model Community.ViewModels.MessageViewModel
+
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>Confirmation</h2>
+
+<div>
+    <h4>Confirmation</h4>
+    <hr />
+   @{
+       @Html.Raw("Message number " + Model.Id + " sent to " + Model.Receiver + ", " + Model.Sent);
+   }
+</div>
