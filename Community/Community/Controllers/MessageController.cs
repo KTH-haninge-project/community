@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
@@ -36,7 +33,7 @@ namespace Community.Controllers
 
             foreach (var message in messages)
             {
-                MessageViewModel viewmodel = new MessageViewModel(message);
+                MessageViewModel viewmodel = MessageToViewModel(message);
                 if (viewmodel.TheMessage.Length > 15)
                 {
                     viewmodel.TheMessage = viewmodel.TheMessage.Substring(0, 10) + "...";
@@ -69,7 +66,7 @@ namespace Community.Controllers
                 return HttpNotFound();
             }
 
-            return View(new MessageViewModel(message));
+            return View(MessageToViewModel(message));
         }
 
        /// <summary>
@@ -166,7 +163,7 @@ namespace Community.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            return View(new MessageViewModel(message));
+            return View(MessageToViewModel(message));
         }
 
         /// <summary>
@@ -217,7 +214,7 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            return View(new MessageViewModel(message));
+            return View(MessageToViewModel(message));
         }
 
         /// <summary>
@@ -274,6 +271,35 @@ namespace Community.Controllers
                 return false;
             }
         }
+
+        
+        public static MessageViewModel MessageToViewModel(Message message)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            MessageViewModel viewmodel = new MessageViewModel();
+            viewmodel.Id = message.Id;
+            viewmodel.Title = message.Title;
+            viewmodel.Receiver = "";
+            viewmodel.Sent = message.sendTimeStamp.ToString();
+            foreach (var entry in message.ReadEntries)
+            {
+                ApplicationUser user = db.Users.Find(entry.Receiver);
+                viewmodel.Receiver += user.Email + ", ";
+            
+            }
+            if (!viewmodel.Receiver.Equals(""))
+            {
+                viewmodel.Receiver = viewmodel.Receiver.Remove(viewmodel.Receiver.Length - 2);
+            }
+            viewmodel.TheMessage = message.TheMessage;
+            var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
+            viewmodel.Sender = lol.Email;
+            viewmodel.addressSpace = new List<string>();
+            viewmodel.recvList = new List<string>();
+
+            return viewmodel;
+        }
+
     }
   
 }

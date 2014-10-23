@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using Community.Models;
@@ -49,36 +44,5 @@ namespace Community.ViewModels
             recvList = new List<string>();
         //empty constructor 
         }
-
-        public MessageViewModel(Message message)
-        {
-            var db = new ApplicationDbContext();
-            this.Id = message.Id;
-            this.Title = message.Title;
-            this.Receiver = "";
-            this.Sent = message.sendTimeStamp.ToString();
-            foreach (var entry in message.ReadEntries)
-            {
-                ApplicationUser user = db.Users.Find(entry.Receiver);
-                Receiver += user.Email + ", ";
-            
-            }
-            if (!Receiver.Equals(""))
-            {
-                Receiver = Receiver.Remove(Receiver.Length - 2);
-            }
-            Debug.WriteLine("Receiver: "+Receiver);
-            this.TheMessage = message.TheMessage;
-            var lol = db.Users.Where(u => u.Id.Equals(message.Sender)).Single();
-            this.Sender = lol.Email;
-            addressSpace=new List<String>();
-
-            recvList = new List<string>();
-
-            
-        }
-
-
-
     }
 }
