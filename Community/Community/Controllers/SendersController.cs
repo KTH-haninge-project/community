@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
 using Community.ViewModels;
-using Community.Models.ViewModels;
 using System.Diagnostics;
 
 namespace Community.Controllers

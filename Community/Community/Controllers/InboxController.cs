@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Community.Models;
 using Microsoft.AspNet.Identity;
@@ -43,7 +40,7 @@ namespace Community.Controllers
 
             foreach (ReadEntry entry in readEntries)
             {
-                MessageViewModel viewmodel = new MessageViewModel(entry.Message);
+                MessageViewModel viewmodel = MessageController.MessageToViewModel(entry.Message);
                 if (entry.hasRead())
                 {
                     viewmodel.Read = entry.FirstReadTime.ToString();
@@ -114,7 +111,7 @@ namespace Community.Controllers
             }
             string currentuser = User.Identity.GetUserId();
             Message message = db.Messages.Find(id);
-            MessageViewModel messageCopy = new MessageViewModel(message);
+            MessageViewModel messageCopy = MessageController.MessageToViewModel(message);
             //set read entry to viewed
             ReadEntry entry=db.ReadEntries.Where(r => r.Message.Id ==id && r.Receiver.Equals(currentuser)).Single();
             if (!entry.hasRead()){
@@ -142,7 +139,7 @@ namespace Community.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MessageViewModel messageViewModel = new MessageViewModel(db.Messages.Find(id));
+            MessageViewModel messageViewModel = MessageController.MessageToViewModel(db.Messages.Find(id));
             if (messageViewModel == null)
             {
                 return HttpNotFound();
